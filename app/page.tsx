@@ -14,13 +14,12 @@ export default function Home() {
       <header
         style={{
           position: "relative",
-          minHeight: "100svh",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
-          padding: "64px 24px 96px",
+          padding: "56px 24px 56px",
           overflow: "hidden",
           background: "var(--cream)",
         }}
@@ -48,7 +47,7 @@ export default function Home() {
               width: "min(560px, 86vw)",
               height: "auto",
               filter: "drop-shadow(0 22px 26px rgba(74,53,40,.28))",
-              animation: "bob 6s ease-in-out infinite",
+              animation: "bob 3.5s ease-in-out infinite",
             }}
           />
 
@@ -88,22 +87,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* scroll cue */}
-        <div
-          className="scroll-cue"
-          style={{
-            position: "absolute", bottom: 26, left: "50%", transform: "translateX(-50%)", zIndex: 3,
-            display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
-            fontFamily: "var(--font-head)", fontSize: ".8rem", letterSpacing: ".14em",
-            textTransform: "uppercase", color: "var(--ink-soft)",
-            animation: "bob 3s ease-in-out infinite",
-          }}
-        >
-          <span>Explore</span>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 9l6 6 6-6" />
-          </svg>
-        </div>
       </header>
 
       {/* ===== TILE GRID ===== */}

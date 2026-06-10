@@ -51,32 +51,120 @@ function AboutContent() {
 
 /* ---- Products section ---- */
 const MENU_PREVIEW = [
-  { name: "Beefy Bark Bowl", cat: "Pawfect Meals", accent: "var(--blush-soft)" },
-  { name: "Cluck Cluck Chicken Bowl", cat: "Pawfect Meals", accent: "var(--peach-soft)" },
-  { name: "Fish Fin Bowl", cat: "Pawfect Meals", accent: "var(--sky-soft)" },
-  { name: "Hounds Gold", cat: "Mealtime Madness", accent: "var(--sage-soft)" },
-  { name: "Pupcakes", cat: "Celebration Goodies", accent: "var(--blush-soft)" },
-  { name: "Bone Appétite Biscuits", cat: "Treats", accent: "var(--peach-soft)" },
+  { name: "Beefy Bark Bowl", cat: "Pawfect Meals", accent: "var(--blush-soft)", emoji: "🥩" },
+  { name: "Cluck Cluck Chicken Bowl", cat: "Pawfect Meals", accent: "var(--peach-soft)", emoji: "🍗" },
+  { name: "Fish Fin Bowl", cat: "Pawfect Meals", accent: "var(--sky-soft)", emoji: "🐟" },
+  { name: "Hounds Gold (Gravy)", cat: "Mealtime Madness", accent: "var(--sage-soft)", emoji: "✨" },
+  { name: "Pupcakes", cat: "Celebration", accent: "var(--blush-soft)", emoji: "🎂" },
+  { name: "Bone Appétite Biscuits", cat: "Treats", accent: "var(--peach-soft)", emoji: "🦴" },
 ];
 
+const REVIEWS = [
+  { name: "Tara & Mochi", stars: 5, text: "Mochi goes absolutely crazy for the Cluck Cluck Chicken Bowl. She used to be such a fussy eater — not anymore! 🐾" },
+  { name: "Devon", stars: 5, text: "The quality is insane for homemade food. You can actually SEE the real ingredients. My boy has so much more energy." },
+  { name: "Priya & Biscuit", stars: 5, text: "Biscuit has been on the Fish Fin Bowl for 3 weeks and his coat is glowing. Cannot recommend enough!" },
+  { name: "The Lim Family", stars: 5, text: "All three of our dogs are obsessed. The Pupcakes for birthdays are the cutest thing we've ever seen 😭" },
+];
+
+const MACROS = [
+  { v: "~40%", k: "Protein" },
+  { v: "~30%", k: "Veggies" },
+  { v: "~30%", k: "Grains" },
+  { v: "Balanced", k: "kcal" },
+];
+
+const INGREDIENTS = ["Free-range chicken", "Pumpkin", "Brown rice", "Carrot", "Salmon oil", "Spinach", "Sweet potato", "Beef mince"];
+
 function ProductsContent() {
+  const [tab, setTab] = useState<"menu" | "reviews" | "breakdown">("menu");
+  const tabs: { id: typeof tab; label: string }[] = [
+    { id: "menu", label: "🍖 The Menu" },
+    { id: "reviews", label: "⭐ Reviews" },
+    { id: "breakdown", label: "🔬 Meal Breakdown" },
+  ];
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-      <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.6, maxWidth: "58ch" }}>
-        Gourmet meals crafted with real ingredients — protein, veg and rice, balanced for your pet&apos;s needs.
-      </p>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12 }}>
-        {MENU_PREVIEW.map((m, i) => (
-          <div key={i} className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ gap: 8 }}>
-            <div style={{ height: 80, borderRadius: 16, background: m.accent, display: "grid", placeItems: "center", fontSize: "2rem" }}>🍖</div>
-            <div style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: "1rem" }}>{m.name}</div>
-            <span className="pill">{m.cat}</span>
-          </div>
+      {/* sub-tabs */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        {tabs.map(t => (
+          <button
+            key={t.id}
+            onClick={() => setTab(t.id)}
+            style={{
+              fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".92rem",
+              padding: "8px 18px", borderRadius: 999, cursor: "pointer",
+              background: tab === t.id ? "var(--peach)" : "var(--white)",
+              color: tab === t.id ? "var(--ink)" : "var(--ink-soft)",
+              border: "3px solid var(--white)",
+              boxShadow: "0 6px 14px -8px rgba(74,53,40,.4)",
+              transition: ".2s",
+            }}
+          >
+            {t.label}
+          </button>
         ))}
       </div>
-      <Link href="/menu" className="btn peach" style={{ alignSelf: "flex-start", fontSize: ".9rem", padding: "10px 20px" }}>
-        See Full Menu →
-      </Link>
+
+      {/* THE MENU */}
+      {tab === "menu" && (
+        <div style={{ animation: "fade .3s ease" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", gap: 12 }}>
+            {MENU_PREVIEW.map((m, i) => (
+              <div key={i} className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ gap: 8 }}>
+                <div style={{ height: 72, borderRadius: 14, background: m.accent, display: "grid", placeItems: "center", fontSize: "2rem" }}>{m.emoji}</div>
+                <div style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".95rem" }}>{m.name}</div>
+                <span className="pill">{m.cat}</span>
+              </div>
+            ))}
+          </div>
+          <Link href="/menu" className="btn peach" style={{ alignSelf: "flex-start", fontSize: ".9rem", padding: "10px 20px", marginTop: 16, display: "inline-flex" }}>
+            Full Menu →
+          </Link>
+        </div>
+      )}
+
+      {/* REVIEWS */}
+      {tab === "reviews" && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 14, animation: "fade .3s ease" }}>
+          {REVIEWS.map((r, i) => (
+            <div key={i} className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ gap: 10 }}>
+              <div style={{ fontSize: "1.1rem", letterSpacing: 2 }}>{"⭐".repeat(r.stars)}</div>
+              <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".92rem", lineHeight: 1.6, fontStyle: "italic" }}>
+                &ldquo;{r.text}&rdquo;
+              </p>
+              <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".9rem", color: "var(--ink)" }}>— {r.name}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* MEAL BREAKDOWN */}
+      {tab === "breakdown" && (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center", animation: "fade .3s ease" }}>
+          <div style={{ width: "100%", height: 120, borderRadius: 20, background: "var(--peach-soft)", display: "grid", placeItems: "center", fontSize: "3rem" }}>🍲</div>
+          <div>
+            <h3 style={{ fontSize: "1.5rem" }}>The Full Bowl</h3>
+            <p style={{ color: "var(--ink-soft)", fontWeight: 500, marginTop: 6, maxWidth: "46ch" }}>
+              Every meal is balanced and portioned — here&apos;s what goes into a complete serving.
+            </p>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+            {MACROS.map(m => (
+              <div key={m.k} className="macro tilt-l">
+                <div className="v">{m.v}</div>
+                <div className="k">{m.k}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
+            {INGREDIENTS.map(ing => <span key={ing} className="pill">{ing}</span>)}
+          </div>
+          <Link href="/menu" className="btn peach" style={{ fontSize: ".9rem", padding: "10px 20px" }}>
+            Full Menu →
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
