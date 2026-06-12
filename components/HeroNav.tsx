@@ -16,8 +16,8 @@ export default function HeroNav() {
       style={{
         width: "100%",
         maxWidth: 680,
-        background: "var(--ink)",
-        padding: 6,
+        background: "#2A1F1A",   /* deep dark brown outer padding */
+        padding: 7,
         display: "flex",
         flexWrap: "wrap",
         gap: 4,
@@ -32,8 +32,8 @@ export default function HeroNav() {
             target="_blank"
             rel="noopener noreferrer"
             style={btnStyle}
-            onMouseEnter={e => (e.currentTarget.style.background = "var(--amber)")}
-            onMouseLeave={e => (e.currentTarget.style.background = "var(--amber-soft)")}
+            onMouseEnter={e => (e.currentTarget.style.background = "var(--amber-soft)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#CCBEAF")}
           >
             {btn.label}
           </a>
@@ -42,8 +42,8 @@ export default function HeroNav() {
             key={btn.label}
             href={btn.href}
             style={btnStyle}
-            onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "var(--amber)"}
-            onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "var(--amber-soft)"}
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "var(--amber-soft)"}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "#CCBEAF"}
           >
             {btn.label}
           </Link>
@@ -56,7 +56,7 @@ export default function HeroNav() {
 const btnStyle: React.CSSProperties = {
   flex: "1 1 auto",
   padding: "12px 10px",
-  background: "var(--amber-soft)",    /* light warm block */
+  background: "#CCBEAF",             /* lighter neutral-soft */
   color: "var(--ink)",
   fontFamily: "var(--font-head)",
   fontWeight: 700,

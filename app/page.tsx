@@ -101,7 +101,6 @@ export default function Home() {
           <div
             style={{
               background: "var(--cream)",
-              borderTop: "1px solid var(--cream-deep)",
               padding: "14px 24px 0",
               textAlign: "center",
             }}
