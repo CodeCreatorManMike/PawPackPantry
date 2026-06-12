@@ -641,15 +641,10 @@ export default function HomeTiles() {
   const s = openIdx !== null ? SECTIONS[openIdx] : null;
 
   return (
-    <div style={{ maxWidth: 1040, margin: "0 auto", padding: "56px 22px 80px", position: "relative" }}>
-      {/* section header */}
-      <div style={{ textAlign: "center", marginBottom: 40 }}>
-        <p className="eyebrow">Tap any tile to peek inside</p>
-        <h2 style={{ fontSize: "clamp(2rem,5.5vw,3rem)", marginTop: 6 }}>Welcome to the Pantry</h2>
-        <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, marginTop: 8, fontSize: ".95rem" }}>
-          Have a sniff around
-        </p>
-      </div>
+    <div style={{ maxWidth: 1040, margin: "0 auto", padding: "32px 22px 80px", position: "relative" }}>
+      <p style={{ textAlign: "center", fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, marginBottom: 28, fontSize: ".9rem" }}>
+        Have a sniff around
+      </p>
 
       <div className="tile-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
         {SECTIONS.map((sec, idx) => (
