@@ -35,7 +35,7 @@ export default function Home() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 20,
+            gap: 32,
             width: "100%",
           }}
         >
@@ -84,44 +84,6 @@ export default function Home() {
           <HeroNav />
         </div>
 
-        {/* Scroll indicator — peeks just above the fold */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "100%",
-            maxWidth: 1040,
-            padding: "0 22px",
-            zIndex: 3,
-          }}
-        >
-          {/* "Welcome to the Pantry" peek — sits right at bottom of viewport */}
-          <div
-            style={{
-              background: "var(--cream)",
-              padding: "14px 24px 0",
-              textAlign: "center",
-            }}
-          >
-            <p
-              className="eyebrow"
-              style={{ marginBottom: 4 }}
-            >
-              Tap any tile to peek inside
-            </p>
-            <h2
-              style={{
-                fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
-                color: "var(--ink)",
-                paddingBottom: 14,
-              }}
-            >
-              Welcome to the Pantry
-            </h2>
-          </div>
-        </div>
       </header>
 
       {/* ===== TILE GRID ===== */}

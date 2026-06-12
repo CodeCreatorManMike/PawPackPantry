@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -637,111 +637,140 @@ const SECTIONS: Section[] = [
 ═══════════════════════════════════════════ */
 export default function HomeTiles() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [colCount, setColCount] = useState(4);
+
+  useEffect(() => {
+    function update() {
+      const w = window.innerWidth;
+      setColCount(w < 380 ? 1 : w < 620 ? 2 : w < 860 ? 3 : 4);
+    }
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   const toggle = useCallback((idx: number) => setOpenIdx(p => (p === idx ? null : idx)), []);
   const s = openIdx !== null ? SECTIONS[openIdx] : null;
 
+  /* Index of the last tile in the same row as the open tile — panel inserts after it */
+  const insertAfterIdx = openIdx !== null
+    ? Math.min((Math.floor(openIdx / colCount) + 1) * colCount - 1, SECTIONS.length - 1)
+    : -1;
+
   return (
-    <div style={{ maxWidth: 1040, margin: "0 auto", padding: "32px 22px 80px", position: "relative" }}>
-      <p style={{ textAlign: "center", fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, marginBottom: 28, fontSize: ".9rem" }}>
-        Have a sniff around
-      </p>
+    <div style={{ maxWidth: 1040, margin: "0 auto", padding: "0 22px 80px", position: "relative" }}>
+
+      {/* Section header */}
+      <div style={{ textAlign: "center", padding: "44px 0 32px" }}>
+        <p className="eyebrow" style={{ marginBottom: 10 }}>Tap any tile to peek inside</p>
+        <h2 style={{ fontSize: "clamp(1.5rem, 4vw, 2.2rem)", color: "var(--ink)", marginBottom: 8 }}>
+          Welcome to the Pantry
+        </h2>
+        <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".9rem" }}>
+          Have a sniff around
+        </p>
+      </div>
 
       <div className="tile-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
-        {SECTIONS.map((sec, idx) => (
-          <button
-            key={sec.key}
-            onClick={() => toggle(idx)}
-            aria-expanded={openIdx === idx}
-            style={{
-              display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
-              textAlign: "center", cursor: "pointer",
-              padding: "20px 12px 16px",
-              background: sec.accent,
-              border: "5px solid var(--white)",
-              borderRadius: "var(--r-lg)",
-              boxShadow: openIdx === idx
-                ? "0 18px 30px -10px rgba(68,49,43,.4)"
-                : "0 8px 20px -10px rgba(68,49,43,.3)",
-              transform: openIdx === idx
-                ? "translateY(-3px) scale(1.03)"
-                : idx % 2 ? "rotate(1.8deg)" : "rotate(-1.8deg)",
-              transition: "transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s",
-              fontFamily: "var(--font-head)",
-              color: sec.accent === A.brownDark ? "var(--cream)" : "var(--ink)",
-            }}
-          >
-            <span style={{
-              width: 56, height: 56, borderRadius: 16,
-              background: "rgba(255,255,255,.65)",
-              display: "grid", placeItems: "center",
-              color: sec.accent === A.brownDark ? A.brownDark : "var(--ink)",
-            }}>
-              {sec.icon}
-            </span>
-            <span style={{ fontSize: "1rem", fontWeight: 600, lineHeight: 1.1 }}>{sec.title}</span>
-            <span style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".7rem", color: sec.accent === A.brownDark ? "rgba(246,244,240,.75)" : "var(--ink-soft)", lineHeight: 1.3 }}>
-              {sec.sub}
-            </span>
-          </button>
-        ))}
-
-        {/* Inline detail panel */}
-        {s && (
-          <div
-            key={openIdx}
-            style={{
-              gridColumn: "1 / -1",
-              borderTop: `8px solid ${s.accent}`,
-              background: "var(--cream)",
-              border: `5px solid var(--white)`,
-              borderTopColor: s.accent,
-              borderTopWidth: 8,
-              borderRadius: "var(--r-lg)",
-              padding: "30px 26px",
-              boxShadow: "0 14px 28px -14px rgba(68,49,43,.35)",
-              animation: "fade .3s ease",
-              position: "relative",
-            }}
-          >
+        {SECTIONS.flatMap((sec, idx): React.ReactNode[] => {
+          const tile = (
             <button
-              onClick={() => setOpenIdx(null)}
-              aria-label="Close"
+              key={sec.key}
+              onClick={() => toggle(idx)}
+              aria-expanded={openIdx === idx}
               style={{
-                position: "absolute", top: 14, right: 14,
-                width: 34, height: 34, borderRadius: "50%",
-                border: "3px solid var(--white)", background: "var(--white)",
-                color: "var(--ink-soft)", display: "grid", placeItems: "center",
-                cursor: "pointer", boxShadow: "0 4px 10px -4px rgba(68,49,43,.3)",
-                transform: "rotate(45deg)", transition: "background .15s",
+                display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
+                textAlign: "center", cursor: "pointer",
+                padding: "20px 12px 16px",
+                background: sec.accent,
+                border: "5px solid var(--white)",
+                borderRadius: "var(--r-lg)",
+                boxShadow: openIdx === idx
+                  ? "0 18px 30px -10px rgba(68,49,43,.4)"
+                  : "0 8px 20px -10px rgba(68,49,43,.3)",
+                transform: openIdx === idx
+                  ? "translateY(-3px) scale(1.03)"
+                  : idx % 2 ? "rotate(1.8deg)" : "rotate(-1.8deg)",
+                transition: "transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s",
+                fontFamily: "var(--font-head)",
+                color: sec.accent === A.brownDark ? "var(--cream)" : "var(--ink)",
               }}
             >
-              {I.plus}
-            </button>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
               <span style={{
-                width: 44, height: 44, flex: "0 0 auto", borderRadius: 13,
-                background: s.accent, border: "4px solid var(--white)",
+                width: 56, height: 56, borderRadius: 16,
+                background: "rgba(255,255,255,.65)",
                 display: "grid", placeItems: "center",
-                color: s.accent === A.brownDark ? "var(--cream)" : "var(--ink)",
-                boxShadow: "0 6px 12px -6px rgba(68,49,43,.35)",
+                color: sec.accent === A.brownDark ? A.brownDark : "var(--ink)",
               }}>
-                {s.icon}
+                {sec.icon}
               </span>
-              <h3 style={{ fontSize: "1.55rem" }}>{s.title}</h3>
-            </div>
+              <span style={{ fontSize: "1rem", fontWeight: 600, lineHeight: 1.1 }}>{sec.title}</span>
+              <span style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".7rem", color: sec.accent === A.brownDark ? "rgba(246,244,240,.75)" : "var(--ink-soft)", lineHeight: 1.3 }}>
+                {sec.sub}
+              </span>
+            </button>
+          );
 
-            {s.content}
+          if (idx !== insertAfterIdx || !s) return [tile];
 
-            {s.fullPage && (
-              <div style={{ marginTop: 18, paddingTop: 14, borderTop: "1px dotted var(--cream-deep)" }}>
-                <Link href={s.fullPage} style={{ fontFamily: "var(--font-head)", fontWeight: 600, color: "var(--ink-soft)", fontSize: ".85rem", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 5 }}>
-                  View full page {I.arrow}
-                </Link>
+          const panel = (
+            <div
+              key="detail-panel"
+              style={{
+                gridColumn: "1 / -1",
+                background: "var(--cream)",
+                border: "5px solid var(--white)",
+                borderTopColor: s.accent,
+                borderTopWidth: 8,
+                borderRadius: "var(--r-lg)",
+                padding: "30px 26px",
+                boxShadow: "0 14px 28px -14px rgba(68,49,43,.35)",
+                animation: "fade .3s ease",
+                position: "relative",
+              }}
+            >
+              <button
+                onClick={() => setOpenIdx(null)}
+                aria-label="Close"
+                style={{
+                  position: "absolute", top: 14, right: 14,
+                  width: 34, height: 34, borderRadius: "50%",
+                  border: "3px solid var(--white)", background: "var(--white)",
+                  color: "var(--ink-soft)", display: "grid", placeItems: "center",
+                  cursor: "pointer", boxShadow: "0 4px 10px -4px rgba(68,49,43,.3)",
+                  transform: "rotate(45deg)", transition: "background .15s",
+                }}
+              >
+                {I.plus}
+              </button>
+
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
+                <span style={{
+                  width: 44, height: 44, flex: "0 0 auto", borderRadius: 13,
+                  background: s.accent, border: "4px solid var(--white)",
+                  display: "grid", placeItems: "center",
+                  color: s.accent === A.brownDark ? "var(--cream)" : "var(--ink)",
+                  boxShadow: "0 6px 12px -6px rgba(68,49,43,.35)",
+                }}>
+                  {s.icon}
+                </span>
+                <h3 style={{ fontSize: "1.55rem" }}>{s.title}</h3>
               </div>
-            )}
-          </div>
-        )}
+
+              {s.content}
+
+              {s.fullPage && (
+                <div style={{ marginTop: 18, paddingTop: 14, borderTop: "1px dotted var(--cream-deep)" }}>
+                  <Link href={s.fullPage} style={{ fontFamily: "var(--font-head)", fontWeight: 600, color: "var(--ink-soft)", fontSize: ".85rem", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 5 }}>
+                    View full page {I.arrow}
+                  </Link>
+                </div>
+              )}
+            </div>
+          );
+
+          return [tile, panel];
+        })}
       </div>
 
       <style>{`
