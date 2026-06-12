@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fredoka, Quicksand } from "next/font/google";
+import { Fredoka, Montserrat, Gochi_Hand } from "next/font/google";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -8,10 +8,16 @@ const fredoka = Fredoka({
   weight: ["400", "500", "600", "700"],
 });
 
-const quicksand = Quicksand({
-  variable: "--font-quicksand",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const gochiHand = Gochi_Hand({
+  variable: "--font-gochi",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +35,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${quicksand.variable}`}>
+    <html lang="en" className={`${fredoka.variable} ${montserrat.variable} ${gochiHand.variable}`}>
       <body className="min-h-screen flex flex-col">{children}</body>
     </html>
   );
