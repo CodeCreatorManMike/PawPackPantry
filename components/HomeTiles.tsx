@@ -49,18 +49,6 @@ function AboutContent() {
           </p>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {/* Mission statement box */}
-          <div style={{ border: "2px solid var(--ink)", borderRadius: 16, padding: "20px 22px", background: "var(--cream)", boxShadow: "3px 3px 0 var(--cream-deep)" }}>
-            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".7rem", letterSpacing: ".2em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: 10 }}>
-              Our Mission
-            </p>
-            <p style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: ".95rem", lineHeight: 1.7, color: "var(--ink)", fontStyle: "italic" }}>
-              &ldquo;But our mission goes beyond the bowl.&rdquo;
-            </p>
-            <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.7, color: "var(--ink-soft)", marginTop: 8 }}>
-              A portion of every purchase is contributed directly to our StreetSmart Campaign, helping fund stray animal feeding programmes, sterilisation initiatives, medical care, rehabilitation efforts, and community education projects across Mauritius.
-            </p>
-          </div>
           <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.7, color: "var(--ink-soft)" }}>
             By choosing Paw Pack Pantry, you&apos;re not only nourishing your own pet — you&apos;re helping create a better future for countless others still waiting for their second chance.
           </p>
@@ -76,6 +64,93 @@ function AboutContent() {
           </p>
         </div>
       </div>
+
+      {/* Mission box at bottom — sticker style, lighter bg */}
+      <div style={{
+        border: "5px solid var(--white)",
+        borderRadius: 20,
+        padding: "22px 26px",
+        background: "var(--white)",
+        boxShadow: "0 10px 26px -10px rgba(68,49,43,.28)",
+        position: "relative",
+        overflow: "hidden",
+      }}>
+        <div style={{ position: "absolute", inset: 0, background: "var(--cream)", opacity: .35, borderRadius: 16 }} />
+        <div style={{ position: "relative" }}>
+          <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".68rem", letterSpacing: ".22em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: 10 }}>
+            Our Mission
+          </p>
+          <p style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: ".95rem", lineHeight: 1.7, color: "var(--ink)", fontStyle: "italic" }}>
+            &ldquo;But our mission goes beyond the bowl.&rdquo;
+          </p>
+          <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.7, color: "var(--ink-soft)", marginTop: 8 }}>
+            A portion of every purchase is contributed directly to our StreetSmart Campaign, helping fund stray animal feeding programmes, sterilisation initiatives, medical care, rehabilitation efforts, and community education projects across Mauritius.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   LEAVE A REVIEW FORM
+───────────────────────────────────────────── */
+function LeaveReviewForm() {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [stars, setStars] = useState(5);
+  const [text, setText] = useState("");
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const msg = `Hi Paw Pack Pantry! I'd like to leave a review:\n\nName: ${name}\nRating: ${"⭐".repeat(stars)}\nReview: ${text}`;
+    window.open(`https://wa.me/23058233898?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+  }
+
+  return (
+    <div style={{ borderTop: "1px dotted var(--cream-deep)", paddingTop: 16 }}>
+      {!open ? (
+        <button
+          onClick={() => setOpen(true)}
+          style={{
+            fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".88rem",
+            padding: "9px 20px", borderRadius: 999, cursor: "pointer",
+            background: "var(--white)", color: "var(--ink)",
+            border: "2px solid var(--cream-deep)",
+            display: "inline-flex", alignItems: "center", gap: 6,
+          }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 15, height: 15 }}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+          Leave a review
+        </button>
+      ) : (
+        <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 12, animation: "fade .3s ease", background: "var(--white)", border: "2px solid var(--cream-deep)", borderRadius: 16, padding: "18px 20px" }}>
+          <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1rem", color: "var(--ink)" }}>Leave a review</p>
+          <input
+            required value={name} onChange={e => setName(e.target.value)}
+            placeholder="Your name"
+            style={{ fontFamily: "var(--font-body)", fontSize: ".9rem", padding: "9px 14px", borderRadius: 10, border: "2px solid var(--cream-deep)", background: "var(--cream)", color: "var(--ink)", outline: "none" }}
+          />
+          <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+            <span style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: ".82rem", color: "var(--ink-soft)" }}>Rating:</span>
+            {[1,2,3,4,5].map(n => (
+              <button key={n} type="button" onClick={() => setStars(n)} style={{ background: "none", border: "none", cursor: "pointer", padding: 2 }}>
+                <svg viewBox="0 0 20 20" fill={n <= stars ? A.amber : "var(--cream-deep)"} style={{ width: 20, height: 20 }}><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+              </button>
+            ))}
+          </div>
+          <textarea
+            required value={text} onChange={e => setText(e.target.value)}
+            placeholder="Tell us about your experience..."
+            rows={3}
+            style={{ fontFamily: "var(--font-body)", fontSize: ".9rem", padding: "9px 14px", borderRadius: 10, border: "2px solid var(--cream-deep)", background: "var(--cream)", color: "var(--ink)", outline: "none", resize: "vertical" }}
+          />
+          <div style={{ display: "flex", gap: 8 }}>
+            <button type="submit" className="btn dark" style={{ fontSize: ".85rem", padding: "9px 18px" }}>Send via WhatsApp</button>
+            <button type="button" onClick={() => setOpen(false)} style={{ fontFamily: "var(--font-head)", fontSize: ".85rem", padding: "9px 14px", borderRadius: 999, border: "2px solid var(--cream-deep)", background: "var(--white)", color: "var(--ink-soft)", cursor: "pointer" }}>Cancel</button>
+          </div>
+        </form>
+      )}
     </div>
   );
 }
@@ -151,20 +226,23 @@ function ProductsContent() {
       )}
 
       {tab === "reviews" && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))", gap: 14, animation: "fade .3s ease" }}>
-          {REVIEWS.map((r, i) => (
-            <div key={i} className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ gap: 10 }}>
-              <div style={{ display: "flex", gap: 2 }}>
-                {Array.from({ length: r.stars }).map((_, s) => (
-                  <svg key={s} viewBox="0 0 20 20" fill={A.amber} style={{ width: 14, height: 14 }}><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                ))}
+        <div style={{ display: "flex", flexDirection: "column", gap: 16, animation: "fade .3s ease" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))", gap: 14 }}>
+            {REVIEWS.map((r, i) => (
+              <div key={i} className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ gap: 10 }}>
+                <div style={{ display: "flex", gap: 2 }}>
+                  {Array.from({ length: r.stars }).map((_, s) => (
+                    <svg key={s} viewBox="0 0 20 20" fill={A.amber} style={{ width: 14, height: 14 }}><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  ))}
+                </div>
+                <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6, color: "var(--ink-soft)", fontStyle: "italic" }}>
+                  &ldquo;{r.text}&rdquo;
+                </p>
+                <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".85rem", color: "var(--ink)" }}>— {r.name}</p>
               </div>
-              <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6, color: "var(--ink-soft)", fontStyle: "italic" }}>
-                &ldquo;{r.text}&rdquo;
-              </p>
-              <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".85rem", color: "var(--ink)" }}>— {r.name}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+          <LeaveReviewForm />
         </div>
       )}
 
@@ -193,6 +271,39 @@ function ProductsContent() {
           <Link href="/menu" className="btn dark" style={{ fontSize: ".85rem", padding: "9px 18px" }}>Full Menu</Link>
         </div>
       )}
+
+      {/* ── Stray Packs — always visible below tabs ── */}
+      <div style={{ borderTop: "1px dotted var(--cream-deep)", paddingTop: 16 }}>
+        <p className="eyebrow" style={{ marginBottom: 8 }}>Sponsor a Stray</p>
+        <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".85rem", color: "var(--ink-soft)", marginBottom: 12 }}>
+          On top of every order, you can directly sponsor a stray&apos;s care.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 10 }}>
+          {[
+            { title: "A Meal for a Stray", desc: "Fund one meal for a stray on the island.", price: "Rs ___", accent: A.amberSoft },
+            { title: "Feed a Stray for a Month", desc: "Cover a full month of meals for one stray.", price: "Rs ___", accent: A.neutral },
+            { title: "Adopt & Sponsor", desc: "Follow a named stray and fund their ongoing care.", price: "Rs ___ / mo", accent: A.warmGray },
+            { title: "StreetSmart Starter Pack", desc: "Sterilisation, de-worming & vet check-up.", price: "Rs ___", accent: A.neutralSoft },
+          ].map(p => (
+            <a
+              key={p.title}
+              href={`https://wa.me/23058233898?text=Hi!%20I'd%20like%20to%20sponsor%20a%20stray%20via%20the%20${encodeURIComponent(p.title)}%20option`}
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                display: "flex", flexDirection: "column", gap: 6, textDecoration: "none",
+                padding: "14px", borderRadius: 16,
+                background: p.accent,
+                border: "4px solid var(--white)",
+                boxShadow: "0 6px 14px -8px rgba(68,49,43,.28)",
+              }}
+            >
+              <span style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".88rem", color: "var(--ink)", lineHeight: 1.2 }}>{p.title}</span>
+              <span style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".75rem", color: "var(--ink-soft)", lineHeight: 1.4 }}>{p.desc}</span>
+              <span style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".82rem", color: "var(--ink)", marginTop: "auto" }}>{p.price}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -395,6 +506,11 @@ function StreetSmartContent() {
             <button onClick={() => setActive(null)} style={{ position: "absolute", top: 12, right: 12, background: "none", border: "none", cursor: "pointer", color: "var(--ink-soft)", display: "grid", placeItems: "center" }}>
               {I.plus}
             </button>
+            {/* Image placeholder — replace src with real image when available */}
+            <div style={{ height: 110, borderRadius: 12, background: A.amberSoft, marginBottom: 14, display: "grid", placeItems: "center", overflow: "hidden", position: "relative" }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(209,130,68,.6) 0%, rgba(138,90,69,.6) 100%)" }} />
+              <span style={{ position: "relative", fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.2rem", color: "var(--white)", textAlign: "center", padding: "0 16px", lineHeight: 1.3 }}>{w.title}</span>
+            </div>
             <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1rem", color: "var(--ink)", marginBottom: 8 }}>{w.title}</p>
             <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".9rem", lineHeight: 1.75 }}>{w.info}</p>
             <a href="https://wa.me/23058233898?text=Hi!%20I%27d%20like%20to%20support%20the%20StreetSmart%20campaign" target="_blank" rel="noopener noreferrer" className="btn dark" style={{ fontSize: ".82rem", padding: "8px 16px", marginTop: 14, display: "inline-flex" }}>
@@ -649,6 +765,21 @@ export default function HomeTiles() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tile = params.get("open");
+    if (tile) {
+      const idx = SECTIONS.findIndex(s => s.key === tile);
+      if (idx !== -1) {
+        setOpenIdx(idx);
+        window.history.replaceState({}, "", window.location.pathname);
+        setTimeout(() => {
+          document.getElementById(`tile-${tile}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 150);
+      }
+    }
+  }, []);
+
   const toggle = useCallback((idx: number) => setOpenIdx(p => (p === idx ? null : idx)), []);
   const s = openIdx !== null ? SECTIONS[openIdx] : null;
 
@@ -676,6 +807,7 @@ export default function HomeTiles() {
           const tile = (
             <button
               key={sec.key}
+              id={`tile-${sec.key}`}
               onClick={() => toggle(idx)}
               aria-expanded={openIdx === idx}
               style={{

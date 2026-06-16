@@ -39,6 +39,24 @@ const STATIC_PACK = [
   "8282e557-9f15-46e8-8c64-e062b8b0f86e",
 ];
 
+/* Founders */
+const FOUNDERS = [
+  {
+    name: "Destinee Ray Jones",
+    role: "Co-founder",
+    bio: 'Nicknamed "Dr Doolittle" from a young age. Destinee has spent years rescuing, rehabilitating and rehoming over 100 animals across Mauritius while pursuing her Medical degree. The heart and soul of Paw Pack Pantry.',
+    initials: "DJ",
+    accent: "var(--amber-soft)",
+  },
+  {
+    name: "Daniel Freitag",
+    role: "Co-founder",
+    bio: "The logistics force and steadfast partner. Daniel brings the muscle, the dedication, and a passion for animal welfare that only grows with every rescue. Equal parts backbone and big heart.",
+    initials: "DF",
+    accent: "var(--neutral)",
+  },
+];
+
 /* Team mascots */
 const TEAM = [
   {
@@ -97,6 +115,32 @@ export default async function GalleryPage() {
       </section>
 
       <main style={{ maxWidth: 1100, margin: "0 auto", padding: "0 22px 100px" }}>
+
+        {/* ===== MEET THE FOUNDERS ===== */}
+        <section style={{ marginBottom: 56 }}>
+          <div style={{ textAlign: "center", marginBottom: 36 }}>
+            <p className="eyebrow">The humans behind the mission</p>
+            <h2 style={{ fontSize: "2rem", marginTop: 6 }}>Meet the Founders</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 18, maxWidth: 720, margin: "0 auto" }}>
+            {FOUNDERS.map((f, i) => (
+              <div
+                key={f.name}
+                className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`}
+                style={{ alignItems: "center", gap: 16, padding: "28px 20px", textAlign: "center" }}
+              >
+                <div style={{ width: 80, height: 80, borderRadius: "50%", background: f.accent, display: "grid", placeItems: "center", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.3rem", color: "var(--ink)" }}>
+                  {f.initials}
+                </div>
+                <div>
+                  <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.25rem" }}>{f.name}</p>
+                  <span className="pill" style={{ marginTop: 4 }}>{f.role}</span>
+                </div>
+                <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>{f.bio}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* ===== MEET THE TEAM ===== */}
         <section style={{ marginBottom: 72 }}>

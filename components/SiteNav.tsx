@@ -3,11 +3,44 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
+const NAV_ICON = {
+  home: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17, flexShrink: 0 }}>
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  ),
+  pantry: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17, flexShrink: 0 }}>
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" />
+    </svg>
+  ),
+  bulb: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17, flexShrink: 0 }}>
+      <path d="M9 18h6" /><path d="M10 22h4" /><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+    </svg>
+  ),
+  news: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17, flexShrink: 0 }}>
+      <rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 8h7M7 12h7M7 16h5M17 8v8" />
+    </svg>
+  ),
+  mail: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17, flexShrink: 0 }}>
+      <rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" />
+    </svg>
+  ),
+  cart: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17, flexShrink: 0 }}>
+      <circle cx="9" cy="20" r="1.4" /><circle cx="18" cy="20" r="1.4" /><path d="M2 3h3l2.4 12.4a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 7H6" />
+    </svg>
+  ),
+};
+
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/menu", label: "The Pantry" },
-  { href: "/streetsmart", label: "StreetSmart" },
-  { href: "/news", label: "News" },
+  { href: "/",            label: "Home",              icon: NAV_ICON.home   },
+  { href: "/menu",        label: "The Pantry",        icon: NAV_ICON.pantry },
+  { href: "/streetsmart", label: "StreetSmart",       icon: NAV_ICON.bulb   },
+  { href: "/news",        label: "News",              icon: NAV_ICON.news   },
 ];
 
 export default function SiteNav() {
@@ -59,7 +92,7 @@ export default function SiteNav() {
               {l.label}
             </Link>
           ))}
-          <Link href="/#contact" style={{ ...linkStyle, color: "var(--ink-soft)" }}
+          <Link href="/?open=contact" style={{ ...linkStyle, color: "var(--ink-soft)" }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "var(--ink)"; (e.currentTarget as HTMLElement).style.background = "var(--cream)"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "var(--ink-soft)"; (e.currentTarget as HTMLElement).style.background = "transparent"; }}
           >
@@ -119,23 +152,34 @@ export default function SiteNav() {
               fontFamily: "var(--font-head)", fontWeight: 600, fontSize: "1rem",
               color: "var(--ink)", textDecoration: "none",
               padding: "10px 14px", borderRadius: 12, background: "var(--cream)",
+              display: "flex", alignItems: "center", gap: 10,
             }}>
+              {l.icon}
               {l.label}
             </Link>
           ))}
-          <Link href="/#contact" onClick={() => setOpen(false)} style={{
+          <Link href="/?open=contact" onClick={() => setOpen(false)} style={{
             fontFamily: "var(--font-head)", fontWeight: 600, fontSize: "1rem",
             color: "var(--ink)", textDecoration: "none",
             padding: "10px 14px", borderRadius: 12, background: "var(--cream)",
+            display: "flex", alignItems: "center", gap: 10,
           }}>
+            {NAV_ICON.mail}
             Contact
           </Link>
           <a
             href="https://wa.me/23058233898?text=Hi%20Paw%20Pack%20Pantry!%20I%27d%20like%20to%20place%20an%20order"
             target="_blank" rel="noopener noreferrer"
-            className="btn dark"
-            style={{ textAlign: "center", marginTop: 6 }}
+            onClick={() => setOpen(false)}
+            style={{
+              fontFamily: "var(--font-head)", fontWeight: 600, fontSize: "1rem",
+              color: "var(--white)", textDecoration: "none",
+              padding: "10px 14px", borderRadius: 12, background: "var(--ink)",
+              display: "flex", alignItems: "center", gap: 10,
+              marginTop: 6,
+            }}
           >
+            {NAV_ICON.cart}
             Order Now
           </a>
         </div>

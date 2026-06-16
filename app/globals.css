@@ -150,7 +150,7 @@ h1,h2,h3,h4 {
 /* ── Bank details ── */
 .bank {
   background: var(--white);
-  border: 5px solid var(--amber-soft);
+  border: 3px dashed var(--amber-soft);
   border-radius: var(--r-md);
   padding: 20px 22px;
   margin-top: 8px;
@@ -188,7 +188,7 @@ h1,h2,h3,h4 {
 .news-date {
   flex: 0 0 auto;
   text-align: center;
-  background: var(--amber-soft);
+  background: rgba(216,169,131,0.55);
   border: 4px solid var(--white);
   border-radius: 14px;
   padding: 9px 12px;

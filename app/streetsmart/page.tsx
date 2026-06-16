@@ -10,6 +10,8 @@ const MISSION_PHOTOS = [
   "7087fc65-417a-4a2e-b5cf-4a4f88a9a467",
   "a4fcfe25-c552-450b-a167-c267649cecc4",
   "b49ed4e6-65b1-4dcb-9dcf-418c9e7b3940",
+  "c9d7561e-a362-41f6-978a-d7d768655552",
+  "ef95bc3d-fc3a-4ae4-beb4-84aff97716ef",
 ];
 
 const SPONSOR_TIERS = [
@@ -51,7 +53,7 @@ export default function StreetSmartPage() {
     <>
       <SiteNav />
 
-      {/* hero */}
+      {/* hero — keep the dark section */}
       <section
         style={{
           position: "relative", overflow: "hidden",
@@ -59,7 +61,6 @@ export default function StreetSmartPage() {
           textAlign: "center",
         }}
       >
-        {/* subtle pattern overlay */}
         <div style={{ position: "absolute", inset: 0, opacity: .06, backgroundImage: "url(/stickers/pattern-transparent.png)", backgroundSize: 200 }} />
 
         <div style={{ position: "relative", zIndex: 2 }}>
@@ -82,44 +83,33 @@ export default function StreetSmartPage() {
             Mauritius&apos;s beautiful streets are sadly home to a rapidly growing stray population. StreetSmart is our promise to every dog and cat waiting for their second chance.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 32 }}>
-            <a href="#sponsor" className="btn" style={{ fontSize: "1rem" }}>🐾 Sponsor a Stray</a>
+            <a href="#sponsor" className="btn" style={{ fontSize: "1rem" }}>Sponsor a Stray</a>
             <a href="https://wa.me/23058233898?text=I'd%20like%20to%20support%20StreetSmart%20🐾" target="_blank" rel="noopener noreferrer" className="btn sage" style={{ fontSize: "1rem" }}>
-              💬 Get in Touch
+              Get in Touch
             </a>
           </div>
         </div>
       </section>
 
       <main style={{ background: "var(--cream)" }}>
-        {/* ===== ABOUT THE MISSION ===== */}
-        <section style={{ maxWidth: 900, margin: "0 auto", padding: "72px 24px 0" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <p className="eyebrow">Who we are</p>
-              <h2 style={{ fontSize: "2.2rem" }}>Born from a rescue, built on purpose.</h2>
-              <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
-                Founded by Destinee Ray Jones and Daniel Freitag, Paw Pack Pantry was created as a way to turn a lifelong passion for animal rescue into sustainable impact.
-              </p>
-              <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
-                A portion of every purchase is contributed directly to our StreetSmart Campaign, helping fund stray animal feeding programmes, sterilisation initiatives, medical care, rehabilitation efforts, and community education projects across Mauritius.
-              </p>
-              <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
-                By choosing Paw Pack Pantry, you&apos;re not only nourishing your own pet — you&apos;re helping create a better future for countless others still waiting for their second chance.
-              </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
-                {["Feeding programmes", "Sterilisation", "Vet care", "Rehabilitation", "Community education"].map(t => (
-                  <span key={t} className="pill">{t}</span>
-                ))}
-              </div>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                {MISSION_PHOTOS.slice(0, 4).map((id, i) => (
-                  <div key={id} className={`sticker ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ overflow: "hidden", borderRadius: 18, aspectRatio: "1", position: "relative" }}>
-                    <Image src={`/photos/${id}.jpeg`} alt="Mission" fill style={{ objectFit: "cover" }} sizes="200px" />
-                  </div>
-                ))}
-              </div>
+        {/* ===== WHO WE ARE — full-width centered text ===== */}
+        <section style={{ maxWidth: 700, margin: "0 auto", padding: "72px 24px 0" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+            <p className="eyebrow" style={{ textAlign: "center" }}>Who we are</p>
+            <h2 style={{ fontSize: "2.2rem", textAlign: "center" }}>Born from a rescue, built on purpose.</h2>
+            <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
+              Founded by Destinee Ray Jones and Daniel Freitag, Paw Pack Pantry was created as a way to turn a lifelong passion for animal rescue into sustainable impact.
+            </p>
+            <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
+              A portion of every purchase is contributed directly to our StreetSmart Campaign, helping fund stray animal feeding programmes, sterilisation initiatives, medical care, rehabilitation efforts, and community education projects across Mauritius.
+            </p>
+            <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
+              By choosing Paw Pack Pantry, you&apos;re not only nourishing your own pet — you&apos;re helping create a better future for countless others still waiting for their second chance.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4, justifyContent: "center" }}>
+              {["Feeding programmes", "Sterilisation", "Vet care", "Rehabilitation", "Community education"].map(t => (
+                <span key={t} className="pill">{t}</span>
+              ))}
             </div>
           </div>
         </section>
@@ -136,16 +126,20 @@ export default function StreetSmartPage() {
           </div>
         </section>
 
-        {/* ===== MISSION GALLERY ===== */}
+        {/* ===== MISSION GALLERY — flat borderless grid ===== */}
         <section style={{ maxWidth: 1100, margin: "72px auto 0", padding: "0 24px" }}>
           <div style={{ textAlign: "center", marginBottom: 36 }}>
             <p className="eyebrow">In the field</p>
             <h2 style={{ fontSize: "2rem", marginTop: 6 }}>Mission Gallery</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 14 }}>
-            {[...MISSION_PHOTOS, "c9d7561e-a362-41f6-978a-d7d768655552", "ef95bc3d-fc3a-4ae4-beb4-84aff97716ef"].map((id, i) => (
-              <div key={id} className={`sticker ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ overflow: "hidden", borderRadius: 20, aspectRatio: "1", position: "relative" }}>
-                <Image src={`/photos/${id}.jpeg`} alt="StreetSmart mission" fill style={{ objectFit: "cover" }} sizes="200px" />
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 4,
+          }}>
+            {MISSION_PHOTOS.map((id) => (
+              <div key={id} style={{ overflow: "hidden", aspectRatio: "1", position: "relative" }}>
+                <Image src={`/photos/${id}.jpeg`} alt="StreetSmart mission" fill style={{ objectFit: "cover" }} sizes="(max-width:600px) 50vw, 25vw" />
               </div>
             ))}
           </div>
@@ -199,7 +193,7 @@ export default function StreetSmartPage() {
               &ldquo;When the right humans come your way, you can trust them. Don&apos;t take 8 months like I did — just accept the love.&rdquo;
             </p>
             <p style={{ color: "var(--blush)", fontFamily: "var(--font-head)", fontWeight: 600, marginTop: 14, fontSize: ".9rem", letterSpacing: ".1em", textTransform: "uppercase" }}>
-              — Molly, Health &amp; Safety Officer 🐕
+              — Molly, Health &amp; Safety Officer
             </p>
           </div>
         </section>

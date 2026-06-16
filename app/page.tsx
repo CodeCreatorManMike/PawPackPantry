@@ -4,7 +4,6 @@ import SiteFooter from "@/components/SiteFooter";
 import HomeTiles from "@/components/HomeTiles";
 import NewsletterForm from "@/components/NewsletterForm";
 import PawScatter from "@/components/PawScatter";
-import HeroNav from "@/components/HeroNav";
 
 export default function Home() {
   return (
@@ -80,8 +79,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Squared hero nav buttons */}
-          <HeroNav />
         </div>
 
       </header>
