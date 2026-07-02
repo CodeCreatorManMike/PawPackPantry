@@ -4,14 +4,14 @@ import SiteFooter from "@/components/SiteFooter";
 import PawScatter from "@/components/PawScatter";
 
 const MISSION_PHOTOS = [
-  "068e34f2-a9d4-4f78-a580-4b8bb3e0d850",
-  "2341c747-2369-4ffa-abe1-a149f3ec40d5",
-  "606d9281-6b77-498f-9aa7-0c085e1fa5fd",
-  "7087fc65-417a-4a2e-b5cf-4a4f88a9a467",
-  "a4fcfe25-c552-450b-a167-c267649cecc4",
-  "b49ed4e6-65b1-4dcb-9dcf-418c9e7b3940",
-  "c9d7561e-a362-41f6-978a-d7d768655552",
-  "ef95bc3d-fc3a-4ae4-beb4-84aff97716ef",
+  "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
+  "/photos/531928b0-640f-4313-98c8-8146a3d04fec.jpeg",
+  "/photos/7527f766-5e85-46fa-bdf6-4d4b8e14ccfe.jpeg",
+  "/photos/78984ba1-b93c-45bd-be54-c44375d1c97e.jpeg",
+  "/photos/f2868212-5371-4506-8c89-19b4234ca303.jpeg",
+  "/photos/97fa385b-8920-4791-999b-e04a4ab1fd6c.jpeg",
+  "/photos/c0f29809-bfd6-471d-b0d3-eda21d793763.jpeg",
+  "/photos/f17a7d19-abb9-48fe-8a6d-7cd378b3b637.jpeg",
 ];
 
 const TESTIMONIES = [
@@ -19,21 +19,25 @@ const TESTIMONIES = [
     name: "Yael Golan",
     short: "Destinee helped save a litter of puppies with parvo against the odds. She doesn't just rescue — she carefully screens every adopter because she genuinely wants the best possible life for every animal. I have complete confidence in the treats she's created.",
     accent: "var(--blush-soft)",
+    image: "/photos/a44623a4-8ad2-438c-ad40-9b776a8a11b7.jpeg",
   },
   {
     name: "Camille & Michel Chui Chun Lam",
     short: "Destiny and Dan are exceptional fosters. They prepared Lupita for life with a forever family — calm, confident, and wonderfully social. Whenever we had questions they were always just a phone call away. Thank you for giving her such a wonderful start in life.",
     accent: "var(--peach-soft)",
+    image: "/photos/0ac3a345-2661-495f-bc94-83c0a96459c6.jpeg",
   },
   {
     name: "Vaanes Bacheccy",
     short: "Poppy is just a spoilt girl loving her best life. She has been a much loved member of our family since we adopted her from Destinee and Dan all those years ago.",
     accent: "var(--sage-soft)",
+    image: "/photos/8be5cd36-1fbf-4ba3-9751-61940c6d9668.jpeg",
   },
   {
     name: "Sarah, Balaclava",
     short: "Destinee and Dan are truly generous, compassionate and loving individuals who care deeply for the wellbeing of animals. I am truly excited about Paw Pack Pantry — this venture is being taken on with passion, commitment, and a genuine heart for the betterment of the island's animals.",
     accent: "var(--sky-soft)",
+    image: "/photos/ffae3270-42f0-4f5b-b026-05b6c7d80a2d.jpeg",
   },
 ];
 
@@ -160,9 +164,9 @@ export default function StreetSmartPage() {
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: 4,
           }}>
-            {MISSION_PHOTOS.map((id) => (
-              <div key={id} style={{ overflow: "hidden", aspectRatio: "1", position: "relative" }}>
-                <Image src={`/photos/${id}.jpeg`} alt="StreetSmart mission" fill style={{ objectFit: "cover" }} sizes="(max-width:600px) 50vw, 25vw" />
+            {MISSION_PHOTOS.map((src) => (
+              <div key={src} style={{ overflow: "hidden", aspectRatio: "1", position: "relative" }}>
+                <Image src={src} alt="StreetSmart mission" fill style={{ objectFit: "cover" }} sizes="(max-width:600px) 50vw, 25vw" />
               </div>
             ))}
           </div>
@@ -182,15 +186,19 @@ export default function StreetSmartPage() {
               <div
                 key={t.name}
                 className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`}
-                style={{ gap: 12, padding: "22px 20px" }}
+                style={{ gap: 12, padding: "0 0 22px" }}
               >
-                <div style={{ width: 48, height: 48, borderRadius: "50%", background: t.accent, display: "grid", placeItems: "center", border: "4px solid var(--white)", boxShadow: "0 6px 16px -8px rgba(74,53,40,.3)", fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.1rem", color: "var(--ink)", flexShrink: 0 }}>
-                  {t.name.slice(0, 1)}
+                {t.image && (
+                  <div style={{ position: "relative", height: 200, overflow: "hidden", borderRadius: "18px 18px 0 0" }}>
+                    <Image src={t.image} alt={t.name} fill style={{ objectFit: "cover" }} sizes="(max-width:600px) 100vw, 280px" />
+                  </div>
+                )}
+                <div style={{ padding: "0 20px", display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.7, color: "var(--ink-soft)", fontStyle: "italic", flex: 1 }}>
+                    &ldquo;{t.short}&rdquo;
+                  </p>
+                  <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".85rem", color: "var(--ink)" }}>— {t.name}</p>
                 </div>
-                <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.7, color: "var(--ink-soft)", fontStyle: "italic", flex: 1 }}>
-                  &ldquo;{t.short}&rdquo;
-                </p>
-                <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".85rem", color: "var(--ink)" }}>— {t.name}</p>
               </div>
             ))}
           </div>
