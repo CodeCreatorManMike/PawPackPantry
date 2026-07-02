@@ -19,24 +19,20 @@ async function getGalleryItems(): Promise<GalleryItem[]> {
 
 /* Static photos from /public/photos for initial display */
 const STATIC_PACK = [
-  "15bf4229-c85a-4f77-ac74-927cedc33c22",
-  "181c4e1f-31de-481f-bae9-9ddf8ca59a18",
-  "187e265d-d7d8-4718-9989-7b76c054ae94",
-  "43a81cdc-1598-4678-bc54-1c57781ddefb",
-  "4a648c1b-eff1-43f2-8c4f-390cd714ca22",
-  "5b8a8755-f9bf-4223-9d10-1f40d4d80283",
-  "5be7484e-c715-4359-ba66-65b42fa2b790",
-  "84f0eaae-13c2-4750-8450-88d6bbe8a47b",
-  "96a26de5-4f88-4c8f-ad8c-e1d3cdb082c1",
-  "b5cb37f8-32dc-4dfb-916c-173eebfb2405",
-  "19beaea3-ad48-452e-8f31-277f0702f31c",
-  "62a3280a-2dd8-4815-9406-e78556ba1f2d",
-  "a6c21158-8984-49df-bbfd-8a48f019309e",
-  "bc1dc31e-61d7-4076-bb87-3d76d6d21f71",
-  "dffe42ab-a47b-4ec7-a9d0-4b0f279520f7",
-  "ebae1757-dac6-44d9-ac9c-e607607da760",
-  "42fe986c-2485-4f27-b54f-905430d76b00",
-  "8282e557-9f15-46e8-8c64-e062b8b0f86e",
+  "/photos/a44623a4-8ad2-438c-ad40-9b776a8a11b7.jpeg",
+  "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
+  "/photos/8be5cd36-1fbf-4ba3-9751-61940c6d9668.jpeg",
+  "/photos/ffae3270-42f0-4f5b-b026-05b6c7d80a2d.jpeg",
+  "/photos/531928b0-640f-4313-98c8-8146a3d04fec.jpeg",
+  "/photos/7527f766-5e85-46fa-bdf6-4d4b8e14ccfe.jpeg",
+  "/photos/32ddb287-f8b1-4342-829a-2690c297fc7c.jpeg",
+  "/photos/78984ba1-b93c-45bd-be54-c44375d1c97e.jpeg",
+  "/photos/0ac3a345-2661-495f-bc94-83c0a96459c6.jpeg",
+  "/photos/97fa385b-8920-4791-999b-e04a4ab1fd6c.jpeg",
+  "/photos/f2868212-5371-4506-8c89-19b4234ca303.jpeg",
+  "/photos/f17a7d19-abb9-48fe-8a6d-7cd378b3b637.jpeg",
+  "/photos/c0f29809-bfd6-471d-b0d3-eda21d793763.jpeg",
+  "/stray-gallery/61c62691-bfde-4af3-aa98-6f38afd50224.JPG",
 ];
 
 /* Founders */
@@ -181,8 +177,8 @@ export default async function GalleryPage() {
           {/* DB items first, then static */}
           {dbItems.filter(i => i.type === "pack").length > 0 ? (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 14 }}>
-              {dbItems.filter(i => i.type === "pack").map((item, i) => (
-                <div key={item.id} className={`sticker ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ overflow: "hidden", borderRadius: 20, aspectRatio: "1", position: "relative" }}>
+              {dbItems.filter(i => i.type === "pack").map((item) => (
+                <div key={item.id} style={{ overflow: "hidden", borderRadius: 20, aspectRatio: "1", position: "relative" }}>
                   <Image src={item.image_url!} alt={item.name} fill style={{ objectFit: "cover" }} sizes="200px" />
                   {item.name && (
                     <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "rgba(74,53,40,.7)", color: "var(--cream)", fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".85rem", padding: "8px 10px" }}>
@@ -194,10 +190,10 @@ export default async function GalleryPage() {
             </div>
           ) : (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 14 }}>
-              {STATIC_PACK.map((id, i) => (
-                <div key={id} className={`sticker ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ overflow: "hidden", borderRadius: 20, aspectRatio: "1", position: "relative" }}>
+              {STATIC_PACK.map((src) => (
+                <div key={src} style={{ overflow: "hidden", borderRadius: 20, aspectRatio: "1", position: "relative" }}>
                   <Image
-                    src={`/photos/${id}.jpeg`}
+                    src={src}
                     alt="Island rescue"
                     fill
                     style={{ objectFit: "cover" }}

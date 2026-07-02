@@ -552,12 +552,12 @@ function StreetSmartContent() {
    5. STRAY GALLERY
 ───────────────────────────────────────────── */
 const GALLERY_PHOTOS = [
-  "15bf4229-c85a-4f77-ac74-927cedc33c22",
-  "181c4e1f-31de-481f-bae9-9ddf8ca59a18",
-  "187e265d-d7d8-4718-9989-7b76c054ae94",
-  "43a81cdc-1598-4678-bc54-1c57781ddefb",
-  "5b8a8755-f9bf-4223-9d10-1f40d4d80283",
-  "84f0eaae-13c2-4750-8450-88d6bbe8a47b",
+  "/photos/a44623a4-8ad2-438c-ad40-9b776a8a11b7.jpeg",
+  "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
+  "/photos/8be5cd36-1fbf-4ba3-9751-61940c6d9668.jpeg",
+  "/stray-gallery/61c62691-bfde-4af3-aa98-6f38afd50224.JPG",
+  "/photos/78984ba1-b93c-45bd-be54-c44375d1c97e.jpeg",
+  "/photos/531928b0-640f-4313-98c8-8146a3d04fec.jpeg",
 ];
 
 function GalleryContent() {
@@ -567,9 +567,9 @@ function GalleryContent() {
         Happy pups, rescue heroes, and tails that wag non-stop. Every photo tells a story of a life well-nourished and a second chance given.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
-        {GALLERY_PHOTOS.map((id, i) => (
-          <div key={id} className={`sticker ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ overflow: "hidden", borderRadius: 16, aspectRatio: "1", position: "relative" }}>
-            <Image src={`/photos/${id}.jpeg`} alt="Rescue animal" fill style={{ objectFit: "cover" }} sizes="(max-width:600px) 30vw, 14vw" />
+        {GALLERY_PHOTOS.map((src) => (
+          <div key={src} style={{ overflow: "hidden", borderRadius: 16, aspectRatio: "1", position: "relative" }}>
+            <Image src={src} alt="Rescue animal" fill style={{ objectFit: "cover" }} sizes="(max-width:600px) 30vw, 14vw" />
           </div>
         ))}
       </div>
