@@ -30,22 +30,22 @@ function formatDate(dateStr: string) {
 /* Placeholder posts shown when Supabase has no data yet */
 const PLACEHOLDER_POSTS: NewsPost[] = [
   {
-    id: "1", slug: "welcome-to-the-pantry", published: true, created_at: "",
-    title: "Welcome to the Pantry! 🐾",
-    body: "Paw Pack Pantry is officially open. We're so excited to start nourishing your pets and supporting Mauritius's strays — one meal at a time.",
-    date: "2026-06-10", image_url: null,
+    id: "3", slug: "every-bowl-can-change-a-life", published: true, created_at: "",
+    title: "Newsletter 3: Every Bowl Can Change a Life — Introducing StreetSmart",
+    body: "Today, we're incredibly proud to introduce the StreetSmart Campaign — the heart of everything we hope to achieve. Our vision is to create a sustainable and lasting impact for the thousands of stray dogs and cats across Mauritius that deserve a second chance. For every pre-order placed before 15 July, Paw Pack Pantry will personally feed one additional stray dog every day for one month.",
+    date: "2026-07-05", image_url: null,
   },
   {
-    id: "2", slug: "luna-approves", published: true, created_at: "",
-    title: "Luna has approved the new menu",
-    body: "After an extensive (and very thorough) taste-testing session, Little Miss Luna has given her stamp of approval on the new seasonal additions. Watch this space.",
-    date: "2026-06-03", image_url: null,
+    id: "2", slug: "luna-has-spoken", published: true, created_at: "",
+    title: "Newsletter 2: Luna Has Spoken — Launch Menu is Here & Pre-Orders Are Open!",
+    body: "After plenty of sniffing, taste testing, and enthusiastic tail wags, our Professional Taste Tester Luna has officially given her paw of approval. The Paw Pack Pantry Launch Menu has arrived! Pre-orders are now OPEN on Friday 3 July — reserve your pet's favourite meals before our pantry officially opens on 15 July.",
+    date: "2026-07-03", image_url: null,
   },
   {
-    id: "3", slug: "streetsmart-june", published: true, created_at: "",
-    title: "StreetSmart June Update",
-    body: "5 strays fed, 2 sterilisations completed, and 1 very happy rescue family. Thank you to everyone who sponsored a stray this month — you made this possible.",
-    date: "2026-05-27", image_url: null,
+    id: "1", slug: "welcome-to-the-pack", published: true, created_at: "",
+    title: "Newsletter 1: Welcome to the Pack",
+    body: "We're so excited to have you here! At Paw Pack Pantry, we are more than just a supplier of gourmet Pet Meals & Treats — we believe every meal should nourish, bring joy, and make a difference. Our promise has always been simple: Every meal is Packed With Purpose. A portion of every purchase supports our StreetSmart Campaign, funding our long-term mission for the strays of Mauritius.",
+    date: "2026-07-01", image_url: null,
   },
 ];
 

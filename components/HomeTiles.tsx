@@ -159,12 +159,12 @@ function LeaveReviewForm() {
    2. OUR PRODUCTS
 ───────────────────────────────────────────── */
 const MENU_PREVIEW = [
-  { name: "Beefy Bark Bowl", cat: "Pawfect Meals", accent: A.amberSoft },
-  { name: "Cluck Cluck Chicken Bowl", cat: "Pawfect Meals", accent: A.neutral },
-  { name: "Fish Fin Bowl", cat: "Pawfect Meals", accent: A.warmGray },
-  { name: "Hounds Gold — Gravy", cat: "Mealtime Madness", accent: A.amberSoft },
-  { name: "Pupcakes", cat: "Celebration", accent: A.neutral },
-  { name: "Bone Appétite Biscuits", cat: "Treats", accent: A.warmGray },
+  { name: "Cluckin' Good Bowl", cat: "The Pawfect Pawtions", accent: A.amberSoft },
+  { name: "Beefy Bark Bowl", cat: "The Pawfect Pawtions", accent: A.neutral },
+  { name: "Coop-to-Bowl (Raw)", cat: "The Rawr Packs", accent: A.warmGray },
+  { name: "Bone Appétit Biscuits", cat: "The Treat Pantry", accent: A.amberSoft },
+  { name: "Pupcakes", cat: "The Birfday Pantry", accent: A.neutral },
+  { name: "Bone Broth", cat: "The Pantry Staples", accent: A.warmGray },
 ];
 
 const REVIEWS = [
@@ -316,7 +316,7 @@ function OrderContent() {
   const [copied, setCopied] = useState(false);
 
   function copyDetails() {
-    navigator.clipboard?.writeText("Paw Pack Pantry\nReference: Your pet's name").catch(() => {});
+    navigator.clipboard?.writeText("Bank: Absa Mauritius\nAccount name: DR Jones\nBranch code: 011\nAccount number: 4080918\nSwift code: BARCMUMU\nReference: Your pet's name").catch(() => {});
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -390,8 +390,12 @@ function OrderContent() {
             ))}
           </div>
           <div className="bank tilt-r">
-            <div className="bank-row"><span className="k">Account name</span><span className="v">Paw Pack Pantry</span></div>
-            <div className="bank-row"><span className="k">Bank</span><span className="v">MCB Bank</span></div>
+            <div className="bank-row"><span className="k">Bank</span><span className="v">Absa Mauritius</span></div>
+            <div className="bank-row"><span className="k">Account type</span><span className="v">Savings Account</span></div>
+            <div className="bank-row"><span className="k">Account name</span><span className="v">DR Jones</span></div>
+            <div className="bank-row"><span className="k">Branch code</span><span className="v">011</span></div>
+            <div className="bank-row"><span className="k">Account number</span><span className="v">4080918</span></div>
+            <div className="bank-row"><span className="k">Swift code</span><span className="v">BARCMUMU</span></div>
             <div className="bank-row"><span className="k">Reference</span><span className="v">Your pet&apos;s name</span></div>
           </div>
           <button onClick={copyDetails} className={`btn ${copied ? "sage" : "dark"}`} style={{ alignSelf: "flex-start", fontSize: ".85rem", padding: "9px 18px" }}>
@@ -402,12 +406,33 @@ function OrderContent() {
 
       {/* Delivery expanded */}
       {sub === "delivery" && (
-        <div style={{ animation: "fade .3s ease", padding: "18px 20px", background: "var(--white)", borderRadius: 16, border: "2px solid var(--cream-deep)" }}>
-          <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: "1rem", color: "var(--ink)", marginBottom: 6 }}>Delivery & Collection Info</p>
-          <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".9rem", lineHeight: 1.7 }}>
-            Detailed delivery and collection information coming soon. In the meantime, please contact us directly on WhatsApp or by email for delivery arrangements.
-          </p>
-          <a href="https://wa.me/23058233898?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20delivery%20and%20collection" target="_blank" rel="noopener noreferrer" className="btn dark" style={{ fontSize: ".82rem", padding: "8px 16px", marginTop: 12, display: "inline-flex" }}>
+        <div style={{ animation: "fade .3s ease", padding: "18px 20px", background: "var(--white)", borderRadius: 16, border: "2px solid var(--cream-deep)", display: "flex", flexDirection: "column", gap: 14 }}>
+          <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1rem", color: "var(--ink)" }}>Delivery & Collection</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".82rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Weekly Delivery Across Mauritius</p>
+            {[
+              { day: "Sunday Afternoon", area: "North & East" },
+              { day: "Monday Morning", area: "Port Louis, Centre, West & South" },
+            ].map(d => (
+              <div key={d.day} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 12, background: "var(--cream)", border: "2px solid var(--cream-deep)" }}>
+                <span style={{ fontSize: "1.2rem" }}>🚗</span>
+                <div>
+                  <div style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".88rem", color: "var(--ink)" }}>{d.day}</div>
+                  <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".78rem", color: "var(--ink-soft)" }}>{d.area}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".82rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Prefer to Collect?</p>
+            <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>
+              We offer convenient collection points throughout the island on select days of the week, as well as collection directly from us in Pereybere. Contact us for full collection locations and times.
+            </p>
+          </div>
+
+          <a href="https://wa.me/23058233898?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20delivery%20and%20collection" target="_blank" rel="noopener noreferrer" className="btn dark" style={{ fontSize: ".82rem", padding: "8px 16px", alignSelf: "flex-start", display: "inline-flex" }}>
             Ask us on WhatsApp
           </a>
         </div>
@@ -559,9 +584,9 @@ function GalleryContent() {
    6. LATEST NEWS
 ───────────────────────────────────────────── */
 const NEWS_PREVIEW = [
-  { d: "10", m: "Jun", title: "Welcome to the Pantry", body: "Paw Pack Pantry is officially open. We are so excited to start nourishing your pets and supporting Mauritius's strays — one meal at a time." },
-  { d: "03", m: "Jun", title: "Luna has approved the new menu", body: "After an extensive taste-testing session, Little Miss Luna has given her stamp of approval on the new seasonal additions." },
-  { d: "27", m: "May", title: "StreetSmart June Update", body: "5 strays fed, 2 sterilisations complete. Thank you to everyone who sponsored this month." },
+  { d: "05", m: "Jul", slug: "every-bowl-can-change-a-life", title: "Every Bowl Can Change a Life", body: "Introducing the StreetSmart Campaign — the heart of everything we hope to achieve. Every meal purchased helps fund feeding programmes, sterilisation, vet care and rehabilitation for Mauritius's strays." },
+  { d: "03", m: "Jul", slug: "luna-has-spoken", title: "Luna Has Spoken — Launch Menu is Here!", body: "After plenty of sniffing and enthusiastic tail wags, our Professional Taste Tester Luna has officially given her paw of approval. Pre-orders are now OPEN!" },
+  { d: "01", m: "Jul", slug: "welcome-to-the-pack", title: "Welcome to the Pack", body: "At Paw Pack Pantry, every meal should do more than satisfy an empty bowl. It should nourish, bring joy, and make a difference. Every meal is Packed With Purpose." },
 ];
 
 function NewsContent() {
@@ -577,6 +602,9 @@ function NewsContent() {
             <div style={{ flex: 1, paddingTop: 3 }}>
               <div style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: "1rem" }}>{n.title}</div>
               <div style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, marginTop: 5, fontSize: ".88rem", lineHeight: 1.6 }}>{n.body}</div>
+              <Link href={`/news/${n.slug}`} style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".82rem", color: "var(--ink-soft)", textDecoration: "none", display: "inline-block", marginTop: 6 }}>
+                Read more →
+              </Link>
             </div>
           </div>
         ))}

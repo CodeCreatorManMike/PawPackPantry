@@ -14,6 +14,29 @@ const MISSION_PHOTOS = [
   "ef95bc3d-fc3a-4ae4-beb4-84aff97716ef",
 ];
 
+const TESTIMONIES = [
+  {
+    name: "Yael Golan",
+    short: "Destinee helped save a litter of puppies with parvo against the odds. She doesn't just rescue — she carefully screens every adopter because she genuinely wants the best possible life for every animal. I have complete confidence in the treats she's created.",
+    accent: "var(--blush-soft)",
+  },
+  {
+    name: "Camille & Michel Chui Chun Lam",
+    short: "Destiny and Dan are exceptional fosters. They prepared Lupita for life with a forever family — calm, confident, and wonderfully social. Whenever we had questions they were always just a phone call away. Thank you for giving her such a wonderful start in life.",
+    accent: "var(--peach-soft)",
+  },
+  {
+    name: "Vaanes Bacheccy",
+    short: "Poppy is just a spoilt girl loving her best life. She has been a much loved member of our family since we adopted her from Destinee and Dan all those years ago.",
+    accent: "var(--sage-soft)",
+  },
+  {
+    name: "Sarah, Balaclava",
+    short: "Destinee and Dan are truly generous, compassionate and loving individuals who care deeply for the wellbeing of animals. I am truly excited about Paw Pack Pantry — this venture is being taken on with passion, commitment, and a genuine heart for the betterment of the island's animals.",
+    accent: "var(--sky-soft)",
+  },
+];
+
 const SPONSOR_TIERS = [
   {
     icon: "🍽️",
@@ -140,6 +163,34 @@ export default function StreetSmartPage() {
             {MISSION_PHOTOS.map((id) => (
               <div key={id} style={{ overflow: "hidden", aspectRatio: "1", position: "relative" }}>
                 <Image src={`/photos/${id}.jpeg`} alt="StreetSmart mission" fill style={{ objectFit: "cover" }} sizes="(max-width:600px) 50vw, 25vw" />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ===== TESTIMONIES ===== */}
+        <section style={{ maxWidth: 1100, margin: "72px auto 0", padding: "0 24px" }}>
+          <div style={{ textAlign: "center", marginBottom: 36 }}>
+            <p className="eyebrow">The pack speaks</p>
+            <h2 style={{ fontSize: "2rem", marginTop: 6 }}>Testimonies</h2>
+            <p style={{ color: "var(--ink-soft)", fontWeight: 500, marginTop: 8, maxWidth: "52ch", margin: "8px auto 0" }}>
+              Words from the families Destinee and Daniel have supported over the years.
+            </p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 18 }}>
+            {TESTIMONIES.map((t, i) => (
+              <div
+                key={t.name}
+                className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`}
+                style={{ gap: 12, padding: "22px 20px" }}
+              >
+                <div style={{ width: 48, height: 48, borderRadius: "50%", background: t.accent, display: "grid", placeItems: "center", border: "4px solid var(--white)", boxShadow: "0 6px 16px -8px rgba(74,53,40,.3)", fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.1rem", color: "var(--ink)", flexShrink: 0 }}>
+                  {t.name.slice(0, 1)}
+                </div>
+                <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.7, color: "var(--ink-soft)", fontStyle: "italic", flex: 1 }}>
+                  &ldquo;{t.short}&rdquo;
+                </p>
+                <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".85rem", color: "var(--ink)" }}>— {t.name}</p>
               </div>
             ))}
           </div>
