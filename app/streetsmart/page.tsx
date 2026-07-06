@@ -37,7 +37,19 @@ const TESTIMONIES = [
     name: "Sarah, Balaclava",
     short: "Destinee and Dan are truly generous, compassionate and loving individuals who care deeply for the wellbeing of animals. I am truly excited about Paw Pack Pantry — this venture is being taken on with passion, commitment, and a genuine heart for the betterment of the island's animals.",
     accent: "var(--sky-soft)",
+    image: "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
+  },
+  {
+    name: "Destiny",
+    short: "Rehomed and thriving. Destiny found her forever family through Destinee and Daniel and never looked back — healthy, loved, and living her absolute best life. 🐾",
+    accent: "var(--amber-soft)",
     image: "/photos/ffae3270-42f0-4f5b-b026-05b6c7d80a2d.jpeg",
+  },
+  {
+    name: "Gracie",
+    short: "Gracie moved home with her forever family and is living happily. A gentle soul who deserved every bit of love she now receives every single day. 🐱",
+    accent: "var(--neutral)",
+    image: "/photos/f2868212-5371-4506-8c89-19b4234ca303.jpeg",
   },
 ];
 
@@ -123,7 +135,7 @@ export default function StreetSmartPage() {
         <section style={{ maxWidth: 700, margin: "0 auto", padding: "72px 24px 0" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
             <p className="eyebrow" style={{ textAlign: "center" }}>Who we are</p>
-            <h2 style={{ fontSize: "2.2rem", textAlign: "center" }}>Born from a rescue, built on purpose.</h2>
+            <h2 style={{ fontSize: "2.2rem", textAlign: "center" }}>Our mission goes beyond the bowl.</h2>
             <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
               Founded by Destinee Ray Jones and Daniel Freitag, Paw Pack Pantry was created as a way to turn a lifelong passion for animal rescue into sustainable impact.
             </p>
@@ -145,7 +157,7 @@ export default function StreetSmartPage() {
         <section style={{ maxWidth: 900, margin: "60px auto 0", padding: "0 24px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
             {IMPACT_STATS.map((s, i) => (
-              <div key={i} className={`macro ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ padding: "20px 14px" }}>
+              <div key={i} className="macro" style={{ padding: "20px 14px" }}>
                 <div className="v" style={{ fontSize: "1.8rem" }}>{s.v}</div>
                 <div className="k">{s.k}</div>
               </div>
@@ -185,7 +197,7 @@ export default function StreetSmartPage() {
             {TESTIMONIES.map((t, i) => (
               <div
                 key={t.name}
-                className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`}
+                className="card"
                 style={{ gap: 12, padding: "0 0 22px" }}
               >
                 {t.image && (
@@ -218,7 +230,7 @@ export default function StreetSmartPage() {
             {SPONSOR_TIERS.map((tier, i) => (
               <div
                 key={tier.title}
-                className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`}
+                className="card"
                 style={{ gap: 14, padding: "24px 20px" }}
               >
                 <div style={{ width: 64, height: 64, borderRadius: 20, background: tier.accent, display: "grid", placeItems: "center", fontSize: "2rem", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)" }}>
@@ -249,10 +261,13 @@ export default function StreetSmartPage() {
             }}
           >
             <p style={{ fontSize: "1.4rem", color: "var(--cream)", fontFamily: "var(--font-head)", fontWeight: 600, lineHeight: 1.5, maxWidth: "54ch", margin: "0 auto" }}>
-              &ldquo;When the right humans come your way, you can trust them. Don&apos;t take 8 months like I did — just accept the love.&rdquo;
+              Paw Pack Pantry started with one simple belief: Every animal deserves a full belly, a healthy life, and the chance to be loved.
             </p>
-            <p style={{ color: "var(--blush)", fontFamily: "var(--font-head)", fontWeight: 600, marginTop: 14, fontSize: ".9rem", letterSpacing: ".1em", textTransform: "uppercase" }}>
-              — Molly, Health &amp; Safety Officer
+            <p style={{ color: "var(--blush-soft)", fontWeight: 500, marginTop: 16, fontSize: "1.05rem", lineHeight: 1.7, maxWidth: "52ch", margin: "16px auto 0" }}>
+              With your support, we&apos;re turning that belief into action. One bowl. One life. One community.
+            </p>
+            <p style={{ color: "var(--blush)", fontFamily: "var(--font-head)", fontWeight: 600, marginTop: 20, fontSize: ".9rem", letterSpacing: ".1em", textTransform: "uppercase" }}>
+              — Destinee &amp; Daniel, Founders of Paw Pack Pantry
             </p>
           </div>
         </section>

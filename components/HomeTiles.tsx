@@ -188,7 +188,7 @@ function ProductsContent() {
   const tabs: { id: typeof tab; label: string }[] = [
     { id: "menu", label: "The Menu" },
     { id: "reviews", label: "Reviews" },
-    { id: "breakdown", label: "Meal Breakdown" },
+    // { id: "breakdown", label: "Meal Breakdown" }, // shelved — fix in dev
   ];
 
   return (
@@ -210,7 +210,7 @@ function ProductsContent() {
         <div style={{ animation: "fade .3s ease" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(148px, 1fr))", gap: 12 }}>
             {MENU_PREVIEW.map((m, i) => (
-              <div key={i} className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ gap: 8 }}>
+              <div key={i} className="card" style={{ gap: 8 }}>
                 <div style={{ height: 68, borderRadius: 12, background: m.accent, display: "grid", placeItems: "center" }}>
                   <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,.5)" }} />
                 </div>
@@ -229,7 +229,7 @@ function ProductsContent() {
         <div style={{ display: "flex", flexDirection: "column", gap: 16, animation: "fade .3s ease" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))", gap: 14 }}>
             {REVIEWS.map((r, i) => (
-              <div key={i} className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ gap: 10 }}>
+              <div key={i} className="card" style={{ gap: 10 }}>
                 <div style={{ display: "flex", gap: 2 }}>
                   {Array.from({ length: r.stars }).map((_, s) => (
                     <svg key={s} viewBox="0 0 20 20" fill={A.amber} style={{ width: 14, height: 14 }}><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -246,7 +246,7 @@ function ProductsContent() {
         </div>
       )}
 
-      {tab === "breakdown" && (
+      {false && tab === "breakdown" && (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 18, textAlign: "center", animation: "fade .3s ease" }}>
           <div style={{ width: "100%", height: 100, borderRadius: 16, background: A.amberSoft, display: "grid", placeItems: "center" }}>
             <div style={{ width: 60, height: 60, borderRadius: "50%", background: "rgba(255,255,255,.4)" }} />
@@ -356,7 +356,7 @@ function OrderContent() {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 24, height: 24 }}><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </span>
           Delivery & Collection
-          <span style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".78rem", opacity: .75 }}>Info coming soon</span>
+          <span style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".78rem", opacity: .75 }}>Weekly delivery across Mauritius</span>
         </button>
 
         {/* Order Now → WhatsApp */}
@@ -406,13 +406,18 @@ function OrderContent() {
 
       {/* Delivery expanded */}
       {sub === "delivery" && (
-        <div style={{ animation: "fade .3s ease", padding: "18px 20px", background: "var(--white)", borderRadius: 16, border: "2px solid var(--cream-deep)", display: "flex", flexDirection: "column", gap: 14 }}>
-          <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1rem", color: "var(--ink)" }}>Delivery & Collection</p>
+        <div style={{ animation: "fade .3s ease", padding: "18px 20px", background: "var(--white)", borderRadius: 16, border: "2px solid var(--cream-deep)", display: "flex", flexDirection: "column", gap: 16 }}>
+          <div>
+            <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1rem", color: "var(--ink)", marginBottom: 4 }}>Door-to-Door Delivery</p>
+            <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>
+              Fresh orders delivered straight to your door every week across Mauritius — no pick-up required.
+            </p>
+          </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".82rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Weekly Delivery Across Mauritius</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".78rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Weekly Delivery Routes</p>
             {[
-              { day: "Sunday Afternoon", area: "North & East" },
+              { day: "Sunday Afternoon", area: "North & East Mauritius" },
               { day: "Monday Morning", area: "Port Louis, Centre, West & South" },
             ].map(d => (
               <div key={d.day} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 12, background: "var(--cream)", border: "2px solid var(--cream-deep)" }}>
@@ -426,14 +431,21 @@ function OrderContent() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".82rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Prefer to Collect?</p>
+            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".78rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Collection Options</p>
             <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>
-              We offer convenient collection points throughout the island on select days of the week, as well as collection directly from us in Pereybere. Contact us for full collection locations and times.
+              Prefer to collect? We offer collection directly from us in <strong style={{ color: "var(--ink)", fontWeight: 700 }}>Pereybere</strong>, plus convenient collection points throughout the island on select days.
             </p>
           </div>
 
-          <a href="https://wa.me/23058233898?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20delivery%20and%20collection" target="_blank" rel="noopener noreferrer" className="btn dark" style={{ fontSize: ".82rem", padding: "8px 16px", alignSelf: "flex-start", display: "inline-flex" }}>
-            Ask us on WhatsApp
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".78rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Pricing</p>
+            <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>
+              Delivery and collection fees vary by area and order size. Message us on WhatsApp for your exact quote and to confirm your preferred option.
+            </p>
+          </div>
+
+          <a href="https://wa.me/23058233898?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20delivery%20and%20collection%20options%20and%20pricing" target="_blank" rel="noopener noreferrer" className="btn dark" style={{ fontSize: ".82rem", padding: "8px 16px", alignSelf: "flex-start", display: "inline-flex" }}>
+            Get delivery info on WhatsApp
           </a>
         </div>
       )}
@@ -686,15 +698,9 @@ function ContactContent() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             <p style={{ fontSize: ".65rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)", fontWeight: 700, fontFamily: "var(--font-head)" }}>Connect with our Founders</p>
-            {[
-              { label: "Destinee", val: "d.r.jones@pawpackpantry.com" },
-              { label: "Daniel", val: "d.p.freitag@pawpackpantry.com" },
-            ].map(e => (
-              <div key={e.label}>
-                <span style={{ fontSize: ".68rem", color: "var(--ink-soft)", fontWeight: 600 }}>{e.label}: </span>
-                <a href={`mailto:${e.val}`} style={{ fontFamily: "var(--font-head)", fontWeight: 500, fontSize: ".82rem", color: "var(--ink)", textDecoration: "none" }}>{e.val}</a>
-              </div>
-            ))}
+            <div>
+              <a href="mailto:info@pawpackpantry.com" style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".88rem", color: "var(--ink)", textDecoration: "none" }}>info@pawpackpantry.com</a>
+            </div>
           </div>
         </div>
 

@@ -31,21 +31,21 @@ function formatDate(dateStr: string) {
 const PLACEHOLDER_POSTS: NewsPost[] = [
   {
     id: "3", slug: "every-bowl-can-change-a-life", published: true, created_at: "",
-    title: "Newsletter 3: Every Bowl Can Change a Life — Introducing StreetSmart",
+    title: "Every Bowl Can Change a Life — Introducing the StreetSmart Campaign",
     body: "Today, we're incredibly proud to introduce the StreetSmart Campaign — the heart of everything we hope to achieve. Our vision is to create a sustainable and lasting impact for the thousands of stray dogs and cats across Mauritius that deserve a second chance. For every pre-order placed before 15 July, Paw Pack Pantry will personally feed one additional stray dog every day for one month.",
-    date: "2026-07-05", image_url: null,
+    date: "2026-07-02", image_url: null,
   },
   {
     id: "2", slug: "luna-has-spoken", published: true, created_at: "",
-    title: "Newsletter 2: Luna Has Spoken — Launch Menu is Here & Pre-Orders Are Open!",
-    body: "After plenty of sniffing, taste testing, and enthusiastic tail wags, our Professional Taste Tester Luna has officially given her paw of approval. The Paw Pack Pantry Launch Menu has arrived! Pre-orders are now OPEN on Friday 3 July — reserve your pet's favourite meals before our pantry officially opens on 15 July.",
-    date: "2026-07-03", image_url: null,
+    title: "Luna Has Spoken — Our Launch Menu is Here & Pre-Orders Are Open",
+    body: "After plenty of sniffing, taste testing, and enthusiastic tail wags, our Professional Taste Tester Luna has officially given her paw of approval. The Paw Pack Pantry Launch Menu has arrived! Pre-orders are now OPEN from 1 July — reserve your pet's favourite meals before our pantry officially opens on 15 July.",
+    date: "2026-07-01", image_url: null,
   },
   {
     id: "1", slug: "welcome-to-the-pack", published: true, created_at: "",
-    title: "Newsletter 1: Welcome to the Pack",
+    title: "Welcome to the Pack — Paw Pack Pantry Launches in Mauritius",
     body: "We're so excited to have you here! At Paw Pack Pantry, we are more than just a supplier of gourmet Pet Meals & Treats — we believe every meal should nourish, bring joy, and make a difference. Our promise has always been simple: Every meal is Packed With Purpose. A portion of every purchase supports our StreetSmart Campaign, funding our long-term mission for the strays of Mauritius.",
-    date: "2026-07-01", image_url: null,
+    date: "2026-06-30", image_url: null,
   },
 ];
 
@@ -87,13 +87,12 @@ export default async function NewsPage() {
                   background: "var(--white)", border: "6px solid var(--white)",
                   borderRadius: 24, padding: "24px 22px",
                   boxShadow: "0 12px 24px -14px rgba(74,53,40,.35)",
-                  transform: i % 2 ? "rotate(.4deg)" : "rotate(-.4deg)",
                   transition: "transform .2s, box-shadow .2s",
                   textDecoration: "none",
                 }}
               >
                 <div
-                  className={`news-date ${i % 2 ? "tilt-l" : "tilt-r"}`}
+                  className="news-date"
                   style={{ flexShrink: 0 }}
                 >
                   <div className="d">{d.day}</div>

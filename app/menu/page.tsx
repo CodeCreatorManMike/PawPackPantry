@@ -253,20 +253,18 @@ function ItemCard({
   item,
   emoji,
   accent,
-  tiltClass,
   onAddToCart,
 }: {
   item: MenuItem;
   emoji: string;
   accent: string;
-  tiltClass: string;
   onAddToCart: (name: string) => void;
 }) {
   const [showIng, setShowIng] = useState(false);
 
   return (
     <div
-      className={`card ${tiltClass}`}
+      className="card"
       style={{ flexDirection: "row", gap: 16, padding: "16px", alignItems: "stretch" }}
     >
       {/* emoji block left */}
@@ -427,7 +425,6 @@ export default function MenuPage() {
                   border: "6px solid var(--white)",
                   borderRadius: 24,
                   boxShadow: "0 12px 24px -14px rgba(74,53,40,.4)",
-                  transform: ci % 2 ? "rotate(.5deg)" : "rotate(-.5deg)",
                 }}
               >
                 <div style={{ position: "absolute", inset: 0, background: cat.accent, opacity: .72 }} />
@@ -457,7 +454,6 @@ export default function MenuPage() {
                         item={item}
                         emoji={cat.emoji}
                         accent={cat.accent}
-                        tiltClass={item.originalIndex % 2 ? "tilt-r" : "tilt-l"}
                         onAddToCart={addToCart}
                       />
                     ))}

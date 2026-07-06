@@ -122,7 +122,7 @@ export default async function GalleryPage() {
             {FOUNDERS.map((f, i) => (
               <div
                 key={f.name}
-                className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`}
+                className="card"
                 style={{ alignItems: "center", gap: 16, padding: "28px 20px", textAlign: "center" }}
               >
                 <div style={{ width: 80, height: 80, borderRadius: "50%", background: f.accent, display: "grid", placeItems: "center", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.3rem", color: "var(--ink)" }}>
@@ -148,7 +148,7 @@ export default async function GalleryPage() {
             {TEAM.map((m, i) => (
               <div
                 key={m.name}
-                className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`}
+                className="card"
                 style={{ textAlign: "center", alignItems: "center", gap: 12, padding: "24px 16px" }}
               >
                 <div style={{ width: 80, height: 80, borderRadius: "50%", background: m.accent, display: "grid", placeItems: "center", fontSize: "2.6rem", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)" }}>
@@ -214,7 +214,7 @@ export default async function GalleryPage() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 18 }}>
               {dbItems.filter(i => i.type === "testimony").map((item, i) => (
-                <div key={item.id} className={`card ${i % 2 ? "tilt-r" : "tilt-l"}`} style={{ gap: 14 }}>
+                <div key={item.id} className="card" style={{ gap: 14 }}>
                   {item.image_url && (
                     <div style={{ position: "relative", height: 180, borderRadius: 16, overflow: "hidden" }}>
                       <Image src={item.image_url} alt={item.name} fill style={{ objectFit: "cover" }} sizes="260px" />
