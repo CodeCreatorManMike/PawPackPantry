@@ -46,3 +46,12 @@ export type NewsletterSubscriber = {
   email: string;
   created_at: string;
 };
+
+export type Review = {
+  id: string;
+  name: string;
+  stars: number;
+  body: string;
+  approved: boolean;
+  created_at: string;
+};

@@ -2,6 +2,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 
 /* ── Tile accent colours (neutral/warm palette) ── */
 const A = {
@@ -100,12 +101,27 @@ function LeaveReviewForm() {
   const [name, setName] = useState("");
   const [stars, setStars] = useState(5);
   const [text, setText] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
-    const msg = `Hi Paw Pack Pantry! I'd like to leave a review:\n\nName: ${name}\nRating: ${"⭐".repeat(stars)}\nReview: ${text}`;
-    window.open(`https://wa.me/23058233898?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+    setStatus("sending");
+    try {
+      const { error } = await supabase.from("reviews").insert({
+        name: name.trim(),
+        stars,
+        body: text.trim(),
+        approved: false,
+      });
+      if (error) throw error;
+      setStatus("done");
+      setName(""); setStars(5); setText("");
+    } catch {
+      setStatus("error");
+    }
   }
+
+  function reset() { setOpen(false); setStatus("idle"); setName(""); setStars(5); setText(""); }
 
   return (
     <div style={{ borderTop: "1px dotted var(--cream-deep)", paddingTop: 16 }}>
@@ -123,6 +139,12 @@ function LeaveReviewForm() {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ width: 15, height: 15 }}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
           Leave a review
         </button>
+      ) : status === "done" ? (
+        <div style={{ animation: "fade .3s ease", background: "var(--sage-soft)", border: "2px solid var(--white)", borderRadius: 16, padding: "18px 20px", display: "flex", flexDirection: "column", gap: 8 }}>
+          <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1rem", color: "var(--ink)" }}>Thank you! 🐾</p>
+          <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".88rem", color: "var(--ink-soft)", lineHeight: 1.6 }}>Your review has been submitted and will appear once approved.</p>
+          <button onClick={reset} style={{ fontFamily: "var(--font-head)", fontSize: ".82rem", padding: "7px 14px", borderRadius: 999, border: "2px solid var(--cream-deep)", background: "var(--white)", color: "var(--ink-soft)", cursor: "pointer", alignSelf: "flex-start" }}>Close</button>
+        </div>
       ) : (
         <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 12, animation: "fade .3s ease", background: "var(--white)", border: "2px solid var(--cream-deep)", borderRadius: 16, padding: "18px 20px" }}>
           <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1rem", color: "var(--ink)" }}>Leave a review</p>
@@ -145,9 +167,21 @@ function LeaveReviewForm() {
             rows={3}
             style={{ fontFamily: "var(--font-body)", fontSize: ".9rem", padding: "9px 14px", borderRadius: 10, border: "2px solid var(--cream-deep)", background: "var(--cream)", color: "var(--ink)", outline: "none", resize: "vertical" }}
           />
+          {status === "error" && (
+            <p style={{ fontFamily: "var(--font-body)", fontSize: ".82rem", color: "#c0392b", fontWeight: 500 }}>
+              Couldn&apos;t submit — please try again or{" "}
+              <a
+                href={`https://wa.me/23058233898?text=${encodeURIComponent(`Hi Paw Pack Pantry! I'd like to leave a review:\n\nName: ${name}\nRating: ${"⭐".repeat(stars)}\nReview: ${text}`)}`}
+                target="_blank" rel="noopener noreferrer"
+                style={{ color: "inherit", fontWeight: 700 }}
+              >send via WhatsApp</a>.
+            </p>
+          )}
           <div style={{ display: "flex", gap: 8 }}>
-            <button type="submit" className="btn dark" style={{ fontSize: ".85rem", padding: "9px 18px" }}>Send via WhatsApp</button>
-            <button type="button" onClick={() => setOpen(false)} style={{ fontFamily: "var(--font-head)", fontSize: ".85rem", padding: "9px 14px", borderRadius: 999, border: "2px solid var(--cream-deep)", background: "var(--white)", color: "var(--ink-soft)", cursor: "pointer" }}>Cancel</button>
+            <button type="submit" disabled={status === "sending"} className="btn dark" style={{ fontSize: ".85rem", padding: "9px 18px", opacity: status === "sending" ? .6 : 1 }}>
+              {status === "sending" ? "Submitting…" : "Submit review"}
+            </button>
+            <button type="button" onClick={reset} style={{ fontFamily: "var(--font-head)", fontSize: ".85rem", padding: "9px 14px", borderRadius: 999, border: "2px solid var(--cream-deep)", background: "var(--white)", color: "var(--ink-soft)", cursor: "pointer" }}>Cancel</button>
           </div>
         </form>
       )}
