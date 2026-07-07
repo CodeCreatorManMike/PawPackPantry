@@ -1,9 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import NewsletterForm from "@/components/NewsletterForm";
 import PawScatter from "@/components/PawScatter";
 import { supabase, type NewsPost } from "@/lib/supabase";
+
+export const metadata: Metadata = {
+  title: "Latest News — Paw Pack Pantry",
+  description: "Weekly updates from the Paw Pack Pantry kitchen — new homemade pet meals, rescue stories, StreetSmart campaign news, and everything in between.",
+  openGraph: {
+    title: "Latest News — Paw Pack Pantry",
+    description: "New menus, rescue stories and StreetSmart updates from Mauritius's home-cooked pet food brand.",
+    images: ["/logos/logo.png"],
+  },
+  keywords: ["pet food news Mauritius", "dog food blog Mauritius", "stray animal rescue news", "Paw Pack Pantry news", "homemade dog treats Mauritius"],
+};
 
 async function getPosts(): Promise<NewsPost[]> {
   try {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
@@ -24,6 +25,19 @@ const PLACEHOLDER_POSTS: NewsPost[] = [
     date: "2026-07-02", image_url: null,
   },
 ];
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = PLACEHOLDER_POSTS.find(p => p.slug === slug);
+  const title = post ? `${post.title} — Paw Pack Pantry` : "News — Paw Pack Pantry";
+  const description = post ? post.body.slice(0, 160) : "Latest news from Paw Pack Pantry Mauritius.";
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: ["/logos/logo.png"] },
+    keywords: ["Paw Pack Pantry", "dog food Mauritius", "homemade pet meals", "stray rescue Mauritius", "StreetSmart campaign"],
+  };
+}
 
 export function generateStaticParams() {
   return PLACEHOLDER_POSTS.map((p) => ({ slug: p.slug }));

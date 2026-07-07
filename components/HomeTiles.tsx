@@ -293,7 +293,7 @@ function ProductsContent() {
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10 }}>
             {MACROS.map(m => (
-              <div key={m.k} className="macro tilt-l">
+              <div key={m.k} className="macro">
                 <div className="v">{m.v}</div>
                 <div className="k">{m.k}</div>
               </div>
@@ -423,7 +423,7 @@ function OrderContent() {
               </div>
             ))}
           </div>
-          <div className="bank tilt-r">
+          <div className="bank">
             <div className="bank-row"><span className="k">Bank</span><span className="v">Absa Mauritius</span></div>
             <div className="bank-row"><span className="k">Account type</span><span className="v">Savings Account</span></div>
             <div className="bank-row"><span className="k">Account name</span><span className="v">DR Jones</span></div>
@@ -630,9 +630,9 @@ function GalleryContent() {
    6. LATEST NEWS
 ───────────────────────────────────────────── */
 const NEWS_PREVIEW = [
-  { d: "05", m: "Jul", slug: "every-bowl-can-change-a-life", title: "Every Bowl Can Change a Life", body: "Introducing the StreetSmart Campaign — the heart of everything we hope to achieve. Every meal purchased helps fund feeding programmes, sterilisation, vet care and rehabilitation for Mauritius's strays." },
-  { d: "03", m: "Jul", slug: "luna-has-spoken", title: "Luna Has Spoken — Launch Menu is Here!", body: "After plenty of sniffing and enthusiastic tail wags, our Professional Taste Tester Luna has officially given her paw of approval. Pre-orders are now OPEN!" },
-  { d: "01", m: "Jul", slug: "welcome-to-the-pack", title: "Welcome to the Pack", body: "At Paw Pack Pantry, every meal should do more than satisfy an empty bowl. It should nourish, bring joy, and make a difference. Every meal is Packed With Purpose." },
+  { d: "02", m: "Jul", slug: "every-bowl-can-change-a-life", title: "Every Bowl Can Change a Life", body: "Introducing the StreetSmart Campaign — the heart of everything we hope to achieve. Every meal purchased helps fund feeding programmes, sterilisation, vet care and rehabilitation for Mauritius's strays." },
+  { d: "01", m: "Jul", slug: "luna-has-spoken", title: "Luna Has Spoken — Launch Menu is Here!", body: "After plenty of sniffing and enthusiastic tail wags, our Professional Taste Tester Luna has officially given her paw of approval. Pre-orders are now OPEN!" },
+  { d: "30", m: "Jun", slug: "welcome-to-the-pack", title: "Welcome to the Pack", body: "At Paw Pack Pantry, every meal should do more than satisfy an empty bowl. It should nourish, bring joy, and make a difference. Every meal is Packed With Purpose." },
 ];
 
 function NewsContent() {
@@ -641,7 +641,7 @@ function NewsContent() {
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {NEWS_PREVIEW.map((n, i) => (
           <div key={i} className="news-item">
-            <div className={`news-date ${i % 2 ? "tilt-l" : "tilt-r"}`}>
+            <div className="news-date">
               <div className="d">{n.d}</div>
               <div className="m">{n.m}</div>
             </div>
@@ -890,7 +890,7 @@ export default function HomeTiles() {
                   : "0 8px 20px -10px rgba(68,49,43,.3)",
                 transform: openIdx === idx
                   ? "translateY(-3px) scale(1.03)"
-                  : idx % 2 ? "rotate(1.8deg)" : "rotate(-1.8deg)",
+                  : "none",
                 transition: "transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s",
                 fontFamily: "var(--font-head)",
                 color: sec.accent === A.brownDark ? "var(--cream)" : "var(--ink)",

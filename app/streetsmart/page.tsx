@@ -1,7 +1,19 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import PawScatter from "@/components/PawScatter";
+
+export const metadata: Metadata = {
+  title: "StreetSmart Campaign — Paw Pack Pantry",
+  description: "Every purchase helps feed, sterilise, and rehome stray dogs and cats across Mauritius. Meet the animals we've rescued and learn how our StreetSmart mission goes beyond the bowl.",
+  openGraph: {
+    title: "StreetSmart Campaign — Paw Pack Pantry",
+    description: "A portion of every order funds our long-term mission for the strays of Mauritius — feeding, vet care, rehabilitation and rehoming, one paw at a time.",
+    images: ["/logos/logo.png"],
+  },
+  keywords: ["stray dog rescue Mauritius", "animal welfare Mauritius", "dog adoption Mauritius", "Paw Pack Pantry StreetSmart", "pet food Mauritius rescue"],
+};
 
 const MISSION_PHOTOS = [
   "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
@@ -155,7 +167,7 @@ export default function StreetSmartPage() {
 
         {/* ===== IMPACT STATS ===== */}
         <section style={{ maxWidth: 900, margin: "60px auto 0", padding: "0 24px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))", gap: 16 }}>
             {IMPACT_STATS.map((s, i) => (
               <div key={i} className="macro" style={{ padding: "20px 14px" }}>
                 <div className="v" style={{ fontSize: "1.8rem" }}>{s.v}</div>

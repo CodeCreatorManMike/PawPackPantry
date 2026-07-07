@@ -1,8 +1,20 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import PawScatter from "@/components/PawScatter";
 import { supabase, type GalleryItem } from "@/lib/supabase";
+
+export const metadata: Metadata = {
+  title: "Gallery — Paw Pack Pantry",
+  description: "Meet the happy pups, rescue heroes and the team behind Paw Pack Pantry. Every photo tells a story of a life well-nourished or a second chance given in Mauritius.",
+  openGraph: {
+    title: "Gallery — Paw Pack Pantry",
+    description: "Happy pups, island rescues and the humans behind the mission. See the Paw Pack Pantry family.",
+    images: ["/logos/logo.png"],
+  },
+  keywords: ["dog rescue Mauritius photos", "Paw Pack Pantry gallery", "rescued animals Mauritius", "pet photos Mauritius"],
+};
 
 async function getGalleryItems(): Promise<GalleryItem[]> {
   try {
