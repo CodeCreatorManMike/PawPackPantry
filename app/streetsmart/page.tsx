@@ -16,14 +16,19 @@ export const metadata: Metadata = {
 };
 
 const MISSION_PHOTOS = [
-  "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
   "/photos/531928b0-640f-4313-98c8-8146a3d04fec.jpeg",
+  "/photos/32ddb287-f8b1-4342-829a-2690c297fc7c.jpeg",
   "/photos/7527f766-5e85-46fa-bdf6-4d4b8e14ccfe.jpeg",
   "/photos/78984ba1-b93c-45bd-be54-c44375d1c97e.jpeg",
-  "/photos/f2868212-5371-4506-8c89-19b4234ca303.jpeg",
+  "/photos/8be5cd36-1fbf-4ba3-9751-61940c6d9668.jpeg",
   "/photos/97fa385b-8920-4791-999b-e04a4ab1fd6c.jpeg",
+  "/photos/a44623a4-8ad2-438c-ad40-9b776a8a11b7.jpeg",
   "/photos/c0f29809-bfd6-471d-b0d3-eda21d793763.jpeg",
+  "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
   "/photos/f17a7d19-abb9-48fe-8a6d-7cd378b3b637.jpeg",
+  "/photos/f2868212-5371-4506-8c89-19b4234ca303.jpeg",
+  "/photos/ffae3270-42f0-4f5b-b026-05b6c7d80a2d.jpeg",
+  "/photos/0ac3a345-2661-495f-bc94-83c0a96459c6.jpeg",
 ];
 
 const TESTIMONIES = [
@@ -37,31 +42,31 @@ const TESTIMONIES = [
     name: "Camille & Michel Chui Chun Lam",
     short: "Destiny and Dan are exceptional fosters. They prepared Lupita for life with a forever family — calm, confident, and wonderfully social. Whenever we had questions they were always just a phone call away. Thank you for giving her such a wonderful start in life.",
     accent: "var(--peach-soft)",
-    image: "/photos/0ac3a345-2661-495f-bc94-83c0a96459c6.jpeg",
+    image: "/photos/7527f766-5e85-46fa-bdf6-4d4b8e14ccfe.jpeg",
   },
   {
     name: "Vaanes Bacheccy",
     short: "Poppy is just a spoilt girl loving her best life. She has been a much loved member of our family since we adopted her from Destinee and Dan all those years ago.",
     accent: "var(--sage-soft)",
-    image: "/photos/8be5cd36-1fbf-4ba3-9751-61940c6d9668.jpeg",
+    image: "/photos/32ddb287-f8b1-4342-829a-2690c297fc7c.jpeg",
   },
   {
     name: "Sarah, Balaclava",
     short: "Destinee and Dan are truly generous, compassionate and loving individuals who care deeply for the wellbeing of animals. I am truly excited about Paw Pack Pantry — this venture is being taken on with passion, commitment, and a genuine heart for the betterment of the island's animals.",
     accent: "var(--sky-soft)",
-    image: "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
+    image: "/testimonials/sarah.jpg",
   },
   {
     name: "Destiny",
-    short: "Rehomed and thriving. Destiny found her forever family through Destinee and Daniel and never looked back — healthy, loved, and living her absolute best life. 🐾",
+    short: "Destiny has grown to become a very cuddly dog who demands a lot of attention and snacks 😊 We cannot imagine our lives without her. She brings us joy everyday and seeing her after work is the best part of my day.",
     accent: "var(--amber-soft)",
-    image: "/photos/ffae3270-42f0-4f5b-b026-05b6c7d80a2d.jpeg",
+    image: "/testimonials/destiny.jpg",
   },
   {
     name: "Gracie",
     short: "Gracie moved home with her forever family and is living happily. A gentle soul who deserved every bit of love she now receives every single day. 🐱",
     accent: "var(--neutral)",
-    image: "/photos/f2868212-5371-4506-8c89-19b4234ca303.jpeg",
+    image: "/testimonials/gracie.jpg",
   },
 ];
 

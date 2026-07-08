@@ -29,22 +29,15 @@ async function getGalleryItems(): Promise<GalleryItem[]> {
   }
 }
 
-/* Static photos from /public/photos for initial display */
+/* Static stray gallery photos — from /public/stray-gallery/ only */
 const STATIC_PACK = [
-  "/photos/a44623a4-8ad2-438c-ad40-9b776a8a11b7.jpeg",
-  "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
-  "/photos/8be5cd36-1fbf-4ba3-9751-61940c6d9668.jpeg",
-  "/photos/ffae3270-42f0-4f5b-b026-05b6c7d80a2d.jpeg",
-  "/photos/531928b0-640f-4313-98c8-8146a3d04fec.jpeg",
-  "/photos/7527f766-5e85-46fa-bdf6-4d4b8e14ccfe.jpeg",
-  "/photos/32ddb287-f8b1-4342-829a-2690c297fc7c.jpeg",
-  "/photos/78984ba1-b93c-45bd-be54-c44375d1c97e.jpeg",
-  "/photos/0ac3a345-2661-495f-bc94-83c0a96459c6.jpeg",
-  "/photos/97fa385b-8920-4791-999b-e04a4ab1fd6c.jpeg",
-  "/photos/f2868212-5371-4506-8c89-19b4234ca303.jpeg",
-  "/photos/f17a7d19-abb9-48fe-8a6d-7cd378b3b637.jpeg",
-  "/photos/c0f29809-bfd6-471d-b0d3-eda21d793763.jpeg",
   "/stray-gallery/61c62691-bfde-4af3-aa98-6f38afd50224.JPG",
+  "/stray-gallery/38A6AEA4-9E2E-4BDF-8755-CC5381D9826E.jpg",
+  "/stray-gallery/7CF2FE1E-A841-454A-94DB-A8226BC6DC97.jpg",
+  "/stray-gallery/BA56CE3B-A9D3-42C9-B5D1-82A6D6E6C050.jpg",
+  "/stray-gallery/DA46A9E7-B5D5-498C-9C2C-E33482AFC3E4.jpg",
+  "/stray-gallery/IMG_5001.jpg",
+  "/stray-gallery/IMG_5770.jpg",
 ];
 
 /* Founders */
@@ -53,14 +46,14 @@ const FOUNDERS = [
     name: "Destinee Ray Jones",
     role: "Co-founder",
     bio: 'Nicknamed "Dr Doolittle" from a young age. Destinee has spent years rescuing, rehabilitating and rehoming over 100 animals across Mauritius while pursuing her Medical degree. The heart and soul of Paw Pack Pantry.',
-    initials: "DJ",
+    image: "/photos/a4fcfe25-c552-450b-a167-c267649cecc4.jpeg",
     accent: "var(--amber-soft)",
   },
   {
     name: "Daniel Freitag",
     role: "Co-founder",
     bio: "The logistics force and steadfast partner. Daniel brings the muscle, the dedication, and a passion for animal welfare that only grows with every rescue. Equal parts backbone and big heart.",
-    initials: "DF",
+    image: "/photos/068e34f2-a9d4-4f78-a580-4b8bb3e0d850.jpeg",
     accent: "var(--neutral)",
   },
 ];
@@ -71,28 +64,28 @@ const TEAM = [
     name: "Tigger",
     role: "Mr Trouble — OG Street King",
     bio: "You'll find me prowling the streets, sizing up anyone 4 times my size. I like to eat, sleep and cause havoc. Basically the modern day Garfield.",
-    emoji: "😼",
+    image: "/team/tigger.png",
     accent: "var(--blush-soft)",
   },
   {
     name: "Luna",
     role: "Professional Taste Tester",
     bio: "I test & taste every new creation before it goes out for orders. NO foul tastes around here — every meal is Luna APPROVED. I'm the Frenchie, after all.",
-    emoji: "🐶",
+    image: "/team/luna.png",
     accent: "var(--peach-soft)",
   },
   {
     name: "Daisy",
     role: "The Secretary",
     bio: "I'm prim & proper but I don't take nonsense. Rescued off the highway at 4 weeks old. Somewhere deep down I truly love them.",
-    emoji: "🐱",
+    image: "/team/daisy.png",
     accent: "var(--sage-soft)",
   },
   {
     name: "Molly",
     role: "Official Health & Safety Officer",
     bio: "I joined the pack in 2024 when Dest & Dan rescued me and my 6 pups from trash bags on the side of the road. We're all living happily now.",
-    emoji: "🐕",
+    image: "/team/molly.png",
     accent: "var(--sky-soft)",
   },
 ];
@@ -137,8 +130,8 @@ export default async function GalleryPage() {
                 className="card"
                 style={{ alignItems: "center", gap: 16, padding: "28px 20px", textAlign: "center" }}
               >
-                <div style={{ width: 80, height: 80, borderRadius: "50%", background: f.accent, display: "grid", placeItems: "center", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.3rem", color: "var(--ink)" }}>
-                  {f.initials}
+                <div style={{ width: 80, height: 80, borderRadius: "50%", overflow: "hidden", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", position: "relative", flexShrink: 0 }}>
+                  <Image src={f.image} alt={f.name} fill style={{ objectFit: "cover", objectPosition: "top" }} sizes="80px" />
                 </div>
                 <div>
                   <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.25rem" }}>{f.name}</p>
@@ -163,8 +156,8 @@ export default async function GalleryPage() {
                 className="card"
                 style={{ textAlign: "center", alignItems: "center", gap: 12, padding: "24px 16px" }}
               >
-                <div style={{ width: 80, height: 80, borderRadius: "50%", background: m.accent, display: "grid", placeItems: "center", fontSize: "2.6rem", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)" }}>
-                  {m.emoji}
+                <div style={{ width: 80, height: 80, borderRadius: "50%", overflow: "hidden", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", position: "relative", flexShrink: 0 }}>
+                  <Image src={m.image} alt={m.name} fill style={{ objectFit: "cover", objectPosition: "top" }} sizes="80px" />
                 </div>
                 <div>
                   <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.3rem" }}>{m.name}</p>

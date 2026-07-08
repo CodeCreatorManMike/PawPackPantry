@@ -70,8 +70,6 @@ export default function SiteFooter() {
               { label: "Call", val: "+230 5823 3897", href: "tel:+23058233897" },
               { label: "WhatsApp", val: "+230 5823 3898", href: "https://wa.me/23058233898" },
               { label: "Orders", val: "orders@pawpackpantry.com", href: "mailto:orders@pawpackpantry.com" },
-              { label: "Info", val: "info@pawpackpantry.com", href: "mailto:info@pawpackpantry.com" },
-              { label: "Stray Support", val: "straysupport@pawpackpantry.com", href: "mailto:straysupport@pawpackpantry.com" },
               { label: "Instagram", val: "@pawpackpantry", href: "https://instagram.com/pawpackpantry" },
             ].map(c => (
               <div key={c.label} style={{ marginBottom: 8 }}>
