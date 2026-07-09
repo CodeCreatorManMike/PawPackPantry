@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 const NAV_ICON = {
   home: (
@@ -45,6 +46,16 @@ const links = [
 
 export default function SiteNav() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const handleContact = useCallback(() => {
+    setOpen(false);
+    if (window.location.pathname === "/") {
+      window.dispatchEvent(new CustomEvent("open-tile", { detail: "contact" }));
+    } else {
+      router.push("/?open=contact");
+    }
+  }, [router]);
 
   const linkStyle = {
     fontFamily: "var(--font-head)",
@@ -92,12 +103,12 @@ export default function SiteNav() {
               {l.label}
             </Link>
           ))}
-          <Link href="/?open=contact" style={{ ...linkStyle, color: "var(--ink-soft)" }}
+          <button onClick={handleContact} style={{ ...linkStyle, color: "var(--ink-soft)", background: "none", border: "none", cursor: "pointer" }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "var(--ink)"; (e.currentTarget as HTMLElement).style.background = "var(--cream)"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "var(--ink-soft)"; (e.currentTarget as HTMLElement).style.background = "transparent"; }}
           >
             Contact
-          </Link>
+          </button>
           <a
             href="https://wa.me/23058233898?text=Hi%20Paw%20Pack%20Pantry!%20I%27d%20like%20to%20place%20an%20order"
             target="_blank" rel="noopener noreferrer"
@@ -158,15 +169,15 @@ export default function SiteNav() {
               {l.label}
             </Link>
           ))}
-          <Link href="/?open=contact" onClick={() => setOpen(false)} style={{
+          <button onClick={handleContact} style={{
             fontFamily: "var(--font-head)", fontWeight: 600, fontSize: "1rem",
-            color: "var(--ink)", textDecoration: "none",
+            color: "var(--ink)", border: "none", cursor: "pointer",
             padding: "10px 14px", borderRadius: 12, background: "var(--cream)",
-            display: "flex", alignItems: "center", gap: 10,
+            display: "flex", alignItems: "center", gap: 10, width: "100%", textAlign: "left",
           }}>
             {NAV_ICON.mail}
             Contact
-          </Link>
+          </button>
           <a
             href="https://wa.me/23058233898?text=Hi%20Paw%20Pack%20Pantry!%20I%27d%20like%20to%20place%20an%20order"
             target="_blank" rel="noopener noreferrer"

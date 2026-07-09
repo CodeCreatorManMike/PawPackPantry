@@ -222,12 +222,11 @@ function ProductsContent() {
   const tabs: { id: typeof tab; label: string }[] = [
     { id: "menu", label: "The Menu" },
     { id: "reviews", label: "Reviews" },
-    // { id: "breakdown", label: "Meal Breakdown" }, // shelved — fix in dev
   ];
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
         {tabs.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)} style={{
             fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".88rem",
@@ -238,24 +237,35 @@ function ProductsContent() {
             transition: ".15s",
           }}>{t.label}</button>
         ))}
+        <Link href="/menu" style={{
+          fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".88rem",
+          padding: "7px 18px", borderRadius: 999,
+          background: "var(--amber)", color: "var(--ink)",
+          border: "2px solid var(--amber)", textDecoration: "none",
+          boxShadow: "0 4px 10px -4px rgba(68,49,43,.3)",
+        }}>
+          Order Now
+        </Link>
       </div>
 
       {tab === "menu" && (
         <div style={{ animation: "fade .3s ease" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(148px, 1fr))", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
             {MENU_PREVIEW.map((m, i) => (
-              <div key={i} className="card" style={{ gap: 8 }}>
-                <div style={{ height: 68, borderRadius: 12, background: m.accent, overflow: "hidden", position: "relative" }}>
-                  <Image src={m.image} alt={m.name} fill style={{ objectFit: "contain" }} sizes="148px" unoptimized />
+              <Link key={i} href="/menu" style={{ textDecoration: "none" }}>
+                <div className="card" style={{ gap: 0, padding: 0, overflow: "hidden", cursor: "pointer" }}>
+                  <div style={{ aspectRatio: "4/3", background: "var(--white)", position: "relative", overflow: "hidden" }}>
+                    <div style={{ position: "absolute", inset: 0, background: m.accent, opacity: 0.18 }} />
+                    <Image src={m.image} alt={m.name} fill style={{ objectFit: "contain", padding: "8px" }} sizes="(max-width: 600px) 45vw, 200px" unoptimized />
+                  </div>
+                  <div style={{ padding: "10px 12px 12px", display: "flex", flexDirection: "column", gap: 4 }}>
+                    <div style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".82rem", color: "var(--ink)", lineHeight: 1.2 }}>{m.name}</div>
+                    <span className="pill" style={{ fontSize: ".65rem", alignSelf: "flex-start" }}>{m.cat}</span>
+                  </div>
                 </div>
-                <div style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".9rem", color: "var(--ink)" }}>{m.name}</div>
-                <span className="pill">{m.cat}</span>
-              </div>
+              </Link>
             ))}
           </div>
-          <Link href="/menu" className="btn dark" style={{ alignSelf: "flex-start", fontSize: ".85rem", padding: "9px 18px", marginTop: 16, display: "inline-flex" }}>
-            Full Menu
-          </Link>
         </div>
       )}
 
@@ -782,19 +792,6 @@ function ContactContent() {
           </div>
         </div>
 
-        {/* Founders */}
-        <div className="contact-card">
-          <div style={{ width: 42, height: 42, flex: "0 0 auto", borderRadius: 12, background: A.warmGray, display: "grid", placeItems: "center" }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" strokeWidth={2} style={{ width: 20, height: 20 }}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <p style={{ fontSize: ".65rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)", fontWeight: 700, fontFamily: "var(--font-head)" }}>Connect with our Founders</p>
-            <div>
-              <a href="mailto:info@pawpackpantry.com" style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".88rem", color: "var(--ink)", textDecoration: "none" }}>info@pawpackpantry.com</a>
-            </div>
-          </div>
-        </div>
-
         {/* Socials */}
         <div className="contact-card">
           <div style={{ width: 42, height: 42, flex: "0 0 auto", borderRadius: 12, background: A.amberSoft, display: "grid", placeItems: "center" }}>
@@ -903,6 +900,20 @@ export default function HomeTiles() {
         }, 150);
       }
     }
+  }, []);
+
+  useEffect(() => {
+    function handler(e: Event) {
+      const key = (e as CustomEvent<string>).detail;
+      const idx = SECTIONS.findIndex(s => s.key === key);
+      if (idx === -1) return;
+      setOpenIdx(idx);
+      setTimeout(() => {
+        document.getElementById(`tile-${key}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 150);
+    }
+    window.addEventListener("open-tile", handler);
+    return () => window.removeEventListener("open-tile", handler);
   }, []);
 
   const toggle = useCallback((idx: number) => setOpenIdx(p => (p === idx ? null : idx)), []);
