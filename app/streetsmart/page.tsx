@@ -244,12 +244,12 @@ export default function StreetSmartPage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18, justifyItems: "stretch", maxWidth: 860, margin: "0 auto" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 18 }}>
             {SPONSOR_TIERS.map((tier, i) => (
               <div
                 key={tier.title}
                 className="card"
-                style={{ gap: 14, padding: "24px 20px" }}
+                style={{ gap: 14, padding: "24px 20px", flex: "0 1 280px", minWidth: 220 }}
               >
                 <div style={{ width: 64, height: 64, borderRadius: 20, background: tier.accent, display: "grid", placeItems: "center", fontSize: "2rem", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)" }}>
                   {tier.icon}

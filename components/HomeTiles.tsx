@@ -192,13 +192,13 @@ function LeaveReviewForm() {
 /* ─────────────────────────────────────────────
    2. OUR PRODUCTS
 ───────────────────────────────────────────── */
-const MENU_PREVIEW = [
-  { name: "Cluckin' Good Bowl", cat: "The Pawfect Pawtions", accent: A.amberSoft, image: "/products/cluckin-good-bowl.png" },
-  { name: "Beefy Bark Bowl", cat: "The Pawfect Pawtions", accent: A.neutral, image: "/products/beefy-bark-bowl.png" },
-  { name: "Coop-to-Bowl (Raw)", cat: "The Rawr Packs", accent: A.warmGray, image: "/products/coop-to-bowl.png" },
-  { name: "Bone Appétit Biscuits", cat: "The Treat Pantry", accent: A.amberSoft, image: "/products/bone-appetit-biscuits.png" },
-  { name: "Pupcakes", cat: "The Birfday Pantry", accent: A.neutral, image: "/products/pupcakes.png" },
-  { name: "Bone Broth", cat: "The Pantry Staples", accent: A.warmGray, image: "/products/bone-broth.png" },
+const MENU_PREVIEW: { name: string; cat: string; accent: string; icon: React.ReactNode }[] = [
+  { name: "Cluckin' Good Bowl", cat: "The Pawfect Pawtions", accent: A.amberSoft, icon: <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:32,height:32}}><path d="M5 16c0 4 2.5 6 9 6s9-2 9-6"/><path d="M4 12h20"/><path d="M7 12c0-4 2.2-7 7-7s7 3 7 7"/><line x1="14" y1="5" x2="14" y2="7"/></svg> },
+  { name: "Beefy Bark Bowl", cat: "The Pawfect Pawtions", accent: A.neutral, icon: <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:32,height:32}}><path d="M5 16c0 4 2.5 6 9 6s9-2 9-6"/><path d="M4 12h20"/><path d="M7 12c0-4 2.2-7 7-7s7 3 7 7"/><line x1="14" y1="5" x2="14" y2="7"/></svg> },
+  { name: "Coop-to-Bowl (Raw)", cat: "The Rawr Packs", accent: A.warmGray, icon: <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:32,height:32}}><path d="M6 18c-1.5-1.5-1.5-4 0-5.5L16.5 2c1.5-1.5 4-1.5 5.5 0s1.5 4 0 5.5L11.5 18c-1.5 1.5-4 1.5-5.5 0z"/><path d="M19 9l2.5 2.5"/><path d="M6 18c0 0-3 2-3 4s2 2 3 3 3.5-1.5 3.5-3.5"/></svg> },
+  { name: "Bone Appétit Biscuits", cat: "The Treat Pantry", accent: A.amberSoft, icon: <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:32,height:32}}><rect x="4" y="10" width="20" height="14" rx="4"/><path d="M9 10V7a5 5 0 0 1 10 0v3"/><circle cx="11" cy="17" r="1.5" fill="currentColor" stroke="none"/><circle cx="17" cy="17" r="1.5" fill="currentColor" stroke="none"/></svg> },
+  { name: "Pupcakes", cat: "The Birfday Pantry", accent: A.neutral, icon: <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:32,height:32}}><path d="M14 3l2 5h5l-4 3.5 1.5 5.5L14 14l-4.5 3 1.5-5.5L7 8h5z"/><line x1="14" y1="14" x2="14" y2="25"/><path d="M9 25h10"/></svg> },
+  { name: "Bone Broth", cat: "The Pantry Staples", accent: A.warmGray, icon: <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:32,height:32}}><path d="M10 4h8l1 4H9z"/><rect x="7" y="8" width="14" height="16" rx="3"/><line x1="12" y1="13" x2="16" y2="13"/><line x1="12" y1="17" x2="16" y2="17"/></svg> },
 ];
 
 const REVIEWS = [
@@ -254,11 +254,10 @@ function ProductsContent() {
             {MENU_PREVIEW.map((m, i) => (
               <Link key={i} href="/menu" style={{ textDecoration: "none" }}>
                 <div className="card" style={{ gap: 0, padding: 0, overflow: "hidden", cursor: "pointer" }}>
-                  <div style={{ aspectRatio: "4/3", background: "var(--white)", position: "relative", overflow: "hidden" }}>
-                    <div style={{ position: "absolute", inset: 0, background: m.accent, opacity: 0.18 }} />
-                    <Image src={m.image} alt={m.name} fill style={{ objectFit: "contain", padding: "8px" }} sizes="(max-width: 600px) 45vw, 200px" unoptimized />
+                  <div style={{ aspectRatio: "4/3", background: m.accent, display: "flex", alignItems: "center", justifyContent: "center", opacity: 0.85 }}>
+                    <span style={{ color: "var(--ink)", transform: "scale(1.6)", display: "flex" }}>{m.icon}</span>
                   </div>
-                  <div style={{ padding: "10px 12px 12px", display: "flex", flexDirection: "column", gap: 4 }}>
+                  <div style={{ padding: "10px 12px 12px", display: "flex", flexDirection: "column", gap: 4, background: "var(--white)" }}>
                     <div style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".82rem", color: "var(--ink)", lineHeight: 1.2 }}>{m.name}</div>
                     <span className="pill" style={{ fontSize: ".65rem", alignSelf: "flex-start" }}>{m.cat}</span>
                   </div>

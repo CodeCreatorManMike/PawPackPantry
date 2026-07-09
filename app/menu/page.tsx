@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import type { ReactNode } from "react";
-import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import PawScatter from "@/components/PawScatter";
@@ -14,7 +13,6 @@ type MenuItem = {
   desc: string;
   ingredients: string[];
   subSection?: string;
-  image?: string;
   sizes: SizeOption[];
 };
 
@@ -44,7 +42,6 @@ const CATEGORIES: Category[] = [
         subSection: "Pawfect Meals",
         name: "Cluckin’ Good Bowl",
         desc: "Chicken, veggies and whole grain rice — balanced and nourishing.",
-        image: "/products/cluckin-good-bowl.png",
         sizes: [{ label: "250g", price: 260 }, { label: "500g", price: 380 }, { label: "750g", price: 500 }, { label: "1kg", price: 590 }],
         ingredients: ["Chicken meat", "Chicken organs", "Chicken broth (water, apple cider vinegar, chicken bones, celery, carrot, parsley, turmeric)", "Carrot", "Zucchini", "Spinach", "Brown rice", "Crushed egg shell (calcium source)", "Parsley", "Turmeric", "Basil", "Pepper", "Omega 3 & 6, blend of multivitamins & minerals"],
       },
@@ -52,7 +49,6 @@ const CATEGORIES: Category[] = [
         subSection: "Pawfect Meals",
         name: "Beefy Bark Bowl",
         desc: "Hearty beef mince with pumpkin, spinach, peas and whole grain rice.",
-        image: "/products/beefy-bark-bowl.png",
         sizes: [{ label: "250g", price: 290 }, { label: "500g", price: 410 }, { label: "750g", price: 540 }, { label: "1kg", price: 670 }],
         ingredients: ["Beef mince", "Beef organs", "Beef broth (water, apple cider vinegar, beef bones, celery, carrot, parsley, turmeric)", "Pumpkin", "Spinach", "Crushed egg shell (calcium source)", "Peas", "Brown rice", "Parsley", "Turmeric", "Pepper", "Omega 3 & 6, blend of multivitamins & minerals"],
       },
@@ -60,7 +56,6 @@ const CATEGORIES: Category[] = [
         subSection: "Pawfect Meals",
         name: "Fintastic Bowl",
         desc: "Omega-rich tuna with carrot, pumpkin and whole grain rice.",
-        image: "/products/fintastic-bowl.png",
         sizes: [{ label: "250g", price: 240 }, { label: "500g", price: 330 }, { label: "750g", price: 410 }, { label: "1kg", price: 500 }],
         ingredients: ["Tuna", "Carrot", "Pumpkin", "Brown rice", "Zucchini", "Parsley", "Crushed egg shells (calcium source)", "Omega 3 & 6, blend of multivitamins & minerals"],
       },
@@ -68,7 +63,6 @@ const CATEGORIES: Category[] = [
         subSection: "Protein Pawtions",
         name: "Shredded Chicken in Broth / Puppy Pops",
         desc: "Tender shredded chicken in homemade broth, or soft chicken meatball pops — great for puppies and seniors. Perfect paired with Veg Pawtions or as a kibble topper. Min 150g.",
-        image: "/products/protein-pawtions-chicken.png",
         sizes: [{ label: "150g", price: 220 }, { label: "300g", price: 300 }, { label: "450g", price: 390 }, { label: "600g", price: 440 }],
         ingredients: ["Shredded chicken", "Parsley", "Chicken broth (water, apple cider vinegar, chicken bones, celery, carrot, parsley, turmeric)"],
       },
@@ -76,7 +70,6 @@ const CATEGORIES: Category[] = [
         subSection: "Protein Pawtions",
         name: "Beef Mince in Broth",
         desc: "Lean beef mince simmered in rich homemade bone broth. Pairs perfectly with Veg Pawtions or over kibble. Min 150g.",
-        image: "/products/protein-pawtions-beef.png",
         sizes: [{ label: "150g", price: 250 }, { label: "300g", price: 380 }, { label: "450g", price: 480 }, { label: "600g", price: 590 }],
         ingredients: ["Beef mince", "Parsley", "Pepper", "Beef broth (water, apple cider vinegar, beef bones, celery, carrot, parsley, turmeric)"],
       },
@@ -84,7 +77,6 @@ const CATEGORIES: Category[] = [
         subSection: "Veg Pawtions",
         name: "Pumpkin & Carrot",
         desc: "Classic, gentle on the tummy and full of vitamins. Pair with any Protein Pawtion for a complete meal. Min 100g.",
-        image: "/products/veg-pawtions.png",
         sizes: [{ label: "150g", price: 190 }, { label: "300g", price: 220 }, { label: "450g", price: 260 }, { label: "600g", price: 290 }],
         ingredients: ["Pumpkin", "Parsley", "Carrot"],
       },
@@ -92,7 +84,6 @@ const CATEGORIES: Category[] = [
         subSection: "Veg Pawtions",
         name: "Carrot, Zucchini, Spinach & Rice",
         desc: "A wholesome veggie medley with brown rice in homemade broth. Pair with any Protein Pawtion. Min 100g.",
-        image: "/products/veg-pawtions.png",
         sizes: [{ label: "150g", price: 190 }, { label: "300g", price: 220 }, { label: "450g", price: 260 }, { label: "600g", price: 290 }],
         ingredients: ["Carrot", "Zucchini", "Spinach", "Brown rice", "Chicken broth (water, apple cider vinegar, carrots, celery, parsley, turmeric, pepper, chicken bones)"],
       },
@@ -113,21 +104,18 @@ const CATEGORIES: Category[] = [
       {
         name: "Coop-to-Bowl",
         desc: "A balanced raw chicken pack with egg, sardine, Greek yogurt and veggies. Sold frozen.",
-        image: "/products/coop-to-bowl.png",
         sizes: [{ label: "250g", price: 220 }, { label: "500g", price: 350 }, { label: "750g", price: 430 }, { label: "1kg", price: 580 }],
         ingredients: ["Chicken foot/neck", "Chicken liver & heart", "Egg & crushed egg shell", "Greek yogurt", "Sardine", "Pumpkin cubes & zucchini"],
       },
       {
         name: "T-Bone Butchery Pack",
         desc: "A hearty raw beef pack loaded with organs, egg, blueberries and spinach. Sold frozen.",
-        image: "/products/tbone-pack.png",
         sizes: [{ label: "250g", price: 300 }, { label: "500g", price: 460 }, { label: "750g", price: 610 }, { label: "1kg", price: 730 }],
         ingredients: ["Beef balls", "Beef liver", "Egg & crushed egg shell", "Pumpkin", "Yogurt", "Blueberries", "Spinach", "Sardine (small)"],
       },
       {
         name: "Catch of the Month",
         desc: "A fish-based raw pack with mackerel, pumpkin, yogurt and apple. Sold frozen.",
-        image: "/products/catch-of-the-month.png",
         sizes: [{ label: "250g", price: 270 }, { label: "500g", price: 380 }, { label: "750g", price: 470 }, { label: "1kg", price: 560 }],
         ingredients: ["Mackerel", "Pumpkin", "Yogurt", "Chicken foot", "Apple", "Egg & crushed eggshell"],
       },
@@ -160,42 +148,36 @@ const CATEGORIES: Category[] = [
       {
         name: "Bone Appétit Biscuits",
         desc: "Homemade gourmet pet biscuits in a variety of flavours picked monthly. Flavours: Chicken, Carrot & Zucchini / Peanut Butter & Pumpkin / Blueberry, Banana & Oat.",
-        image: "/products/bone-appetit-biscuits.png",
         sizes: [{ label: "S", price: 250 }, { label: "L", price: 350 }],
         ingredients: ["Whole wheat flour", "Rolled oats", "Egg", "Chicken broth or blueberries", "Carrot or pumpkin purée", "Banana purée", "Natural peanut butter", "Water"],
       },
       {
         name: "Fishy Fin Biscuits",
         desc: "Homemade gourmet tuna biscuits — a fish lover’s dream.",
-        image: "/products/fishy-fin-biscuits.png",
         sizes: [{ label: "S", price: 260 }, { label: "L", price: 410 }],
         ingredients: ["Tuna", "Egg", "Oats", "Whole wheat flour"],
       },
       {
         name: "‘Good Dog!’ Sweethearts",
         desc: "Heart-shaped biscuits in a variety of flavours picked monthly. Flavours: Blueberry, Banana & Oat / Peanut Butter & Oat.",
-        image: "/products/good-dog-sweethearts.png",
         sizes: [{ label: "S", price: 230 }, { label: "L", price: 360 }],
         ingredients: ["Whole wheat flour", "Rolled oats", "Banana purée", "Blueberries", "Large egg", "Natural peanut butter", "Water"],
       },
       {
         name: "Pawsicles",
         desc: "Homemade gourmet pet popsicles, set with gelatin and served chilled. Flavours: Blueberry & Banana / Pumpkin & Carrot.",
-        image: "/products/pawsicles.png",
         sizes: [{ label: "S", price: 280 }, { label: "L", price: 500 }],
         ingredients: ["Blueberries / Carrot", "Banana purée / Pumpkin purée", "Greek yogurt", "Gelatin", "Water"],
       },
       {
         name: "Chicken Jerky",
         desc: "Homemade gourmet chicken jerky — chewy, delicious and packed with protein.",
-        image: "/products/chicken-jerky.png",
         sizes: [{ label: "One size", price: 340 }],
         ingredients: ["Chicken", "Apple cider vinegar"],
       },
       {
         name: "Apple, Zucchini & Carrot Chew Sticks",
         desc: "Homemade gourmet chew sticks — great for digestion!",
-        image: "/products/chew-sticks.png",
         sizes: [{ label: "S", price: 220 }, { label: "L", price: 310 }],
         ingredients: ["Apple & apple purée", "Zucchini", "Carrot", "Natural peanut butter", "Oat", "Coconut oil"],
       },
@@ -217,28 +199,24 @@ const CATEGORIES: Category[] = [
       {
         name: "Bone Broth",
         desc: "Full of nutrients, vitamins and minerals. Add to kibble or any meal for benefits to joints, gut health, skin & coat and immune system. Available: Chicken or Beef.",
-        image: "/products/bone-broth.png",
         sizes: [{ label: "300ml", price: 260 }, { label: "500ml", price: 340 }],
         ingredients: ["Chicken or beef bones", "Water", "Apple cider vinegar", "Carrot", "Celery", "Parsley", "Turmeric"],
       },
       {
         name: "Gravy",
         desc: "Homemade gourmet pet gravy — perfect to add flavour and top off any meal. Available: Chicken or Beef.",
-        image: "/products/gravy.png",
         sizes: [{ label: "300ml", price: 250 }, { label: "500ml", price: 330 }],
         ingredients: ["Chicken or beef broth", "Carrot", "Pumpkin", "Parsley", "Turmeric"],
       },
       {
         name: "Bone Broth Gummies",
         desc: "Homemade gourmet pet bone broth gelatin gummies. Available: Chicken or Beef.",
-        image: "/products/bone-broth-gummies.png",
         sizes: [{ label: "S", price: 220 }, { label: "L", price: 450 }],
         ingredients: ["Bone broth (chicken or beef — water, apple cider vinegar, bones, celery, carrot, parsley, turmeric)", "Gelatin"],
       },
       {
         name: "Training Treats",
         desc: "Homemade gourmet training treats in a variety of flavours — Chicken, Beef or Tuna.",
-        image: "/products/training-treats.png",
         sizes: [{ label: "XS", price: 125 }, { label: "S", price: 250 }, { label: "L", price: 300 }],
         ingredients: [
           "Chicken: whole wheat flour, rolled oats, chicken pate, egg, chicken broth",
@@ -249,21 +227,18 @@ const CATEGORIES: Category[] = [
       {
         name: "Allergy Support Chewies",
         desc: "Gelatin chewies served chilled to help smooth itchy allergy flare ups!",
-        image: "/products/allergy-chewies.png",
         sizes: [{ label: "One size", price: 360 }],
         ingredients: ["Blueberry", "Apple", "Honey", "Coconut oil", "Greek yogurt", "Gelatin", "Water"],
       },
       {
         name: "Snouty Sprinkles",
         desc: "A magical sprinkle of ground biscuits — packed with surprising flavours. Sprinkle over any meal for extra flavour, crunch, or to entice fussy eaters.",
-        image: "/products/snouty-sprinkles.png",
         sizes: [{ label: "One size", price: 220 }],
         ingredients: ["Whole wheat flour", "Rolled oats", "Carrot", "Zucchini", "Egg", "Chicken broth", "Pumpkin purée", "Natural peanut butter", "Banana purée", "Blueberries", "Tuna"],
       },
       {
         name: "Breath Mints",
         desc: "Keep those sloppy snouty kisses nice & fresh!",
-        image: "/products/breath-mints.png",
         sizes: [{ label: "One size", price: 400 }],
         ingredients: ["Mint", "Spinach", "Parsley", "Cucumber", "Greek yogurt", "Gelatin", "Water"],
       },
@@ -290,7 +265,6 @@ const CATEGORIES: Category[] = [
       {
         name: "Pupcakes",
         desc: "Homemade gourmet pet cupcakes for their special day! Available in 6 or 12. Flavours: Zucchini, Carrot & Chicken / Blueberries, Banana, Peanut Butter & Oats.",
-        image: "/products/pupcakes.png",
         sizes: [{ label: "One size", price: 350 }],
         ingredients: ["Zucchini, Carrot & Chicken", "Blueberries, Banana, Peanut Butter & Oats"],
       },
@@ -338,13 +312,11 @@ function ItemCard({
   icon,
   accent,
   onAddToCart,
-  onImageClick,
 }: {
   item: MenuItem;
   icon: ReactNode;
   accent: string;
   onAddToCart: (name: string, size: string, price: number) => void;
-  onImageClick: (src: string) => void;
 }) {
   const [showIng, setShowIng] = useState(false);
   const [selIdx, setSelIdx] = useState(0);
@@ -358,34 +330,16 @@ function ItemCard({
   return (
     <div className="card" style={{ flexDirection: "row", gap: 14, padding: "14px", alignItems: "stretch" }}>
 
-      {/* left: image thumbnail or emoji */}
+      {/* left: icon thumbnail */}
       <div
-        onClick={item.image ? () => onImageClick(item.image!) : undefined}
         style={{
           width: 100, minHeight: 100, flexShrink: 0,
           borderRadius: 14, overflow: "hidden",
           background: accent,
-          position: "relative",
-          cursor: item.image ? "zoom-in" : "default",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: "2.2rem",
         }}
       >
-        {item.image ? (
-          <Image src={item.image} alt={item.name} fill style={{ objectFit: "cover" }} sizes="100px" unoptimized />
-        ) : (
-          <span style={{ opacity: .8, color: "var(--ink)", width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center" }}>{icon}</span>
-        )}
-        {item.image && (
-          <div style={{
-            position: "absolute", bottom: 4, right: 4,
-            background: "rgba(255,255,255,.85)", borderRadius: 6,
-            width: 20, height: 20, display: "grid", placeItems: "center",
-            fontSize: ".6rem", color: "var(--ink)", fontWeight: 700, lineHeight: 1,
-          }}>
-            🔍
-          </div>
-        )}
+        <span style={{ color: "var(--ink)", opacity: .75, transform: "scale(2.2)", display: "flex" }}>{icon}</span>
       </div>
 
       {/* right: info */}
@@ -487,45 +441,10 @@ function ItemCard({
 }
 
 /* ─── Lightbox ──────────────────────────────── */
-function Lightbox({ src, onClose }: { src: string; onClose: () => void }) {
-  return (
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed", inset: 0, zIndex: 9000,
-        background: "rgba(30,20,15,.92)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        cursor: "zoom-out",
-      }}
-    >
-      <div
-        style={{ position: "relative", width: "min(90vw,680px)", height: "min(90vw,680px)" }}
-        onClick={e => e.stopPropagation()}
-      >
-        <Image src={src} alt="Product" fill style={{ objectFit: "contain" }} sizes="90vw" unoptimized />
-      </div>
-      <button
-        onClick={onClose}
-        style={{
-          position: "fixed", top: 18, right: 18, zIndex: 9001,
-          fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.3rem",
-          background: "var(--white)", color: "var(--ink)",
-          border: "none", borderRadius: "50%", width: 42, height: 42,
-          cursor: "pointer", display: "grid", placeItems: "center",
-          boxShadow: "0 4px 12px -4px rgba(0,0,0,.5)",
-        }}
-        aria-label="Close image"
-      >
-        ×
-      </button>
-    </div>
-  );
-}
 
 /* ─── Page ──────────────────────────────────── */
 export default function MenuPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
 
   function addToCart(name: string, size: string, price: number) {
@@ -558,8 +477,6 @@ export default function MenuPage() {
   return (
     <>
       <SiteNav />
-
-      {lightboxSrc && <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />}
 
       {/* hero */}
       <section style={{ position: "relative", overflow: "hidden", background: "var(--cream)", padding: "72px 24px 56px", textAlign: "center" }}>
@@ -625,7 +542,6 @@ export default function MenuPage() {
                         icon={cat.icon}
                         accent={cat.accent}
                         onAddToCart={addToCart}
-                        onImageClick={setLightboxSrc}
                       />
                     ))}
                   </div>
