@@ -76,21 +76,21 @@ const TESTIMONIES = [
 
 const SPONSOR_TIERS = [
   {
-    icon: "🍽️",
+    icon: "/icons/sponsor-a-meal.svg",
     title: "A Meal for a Stray",
     desc: "Fund one nutritious meal for a stray on the island. Every belly filled is a step forward.",
     price: "Rs 65",
     accent: "var(--blush)",
   },
   {
-    icon: "📅",
+    icon: "/icons/sponsor-1-month.svg",
     title: "Sponsor Meals for a Month",
     desc: "Pay for thirty meals for a stray of Mauritius — consistent nutrition makes a real difference.",
     price: "Rs 950",
     accent: "var(--peach)",
   },
   {
-    icon: "🏥",
+    icon: "/icons/streetsmart-starter.svg",
     title: "StreetSmart Starter Pack",
     desc: "Pay to have one stray vet checked, dewormed & sterilised. Life-changing care.",
     price: "Rs 1,500",
@@ -251,8 +251,8 @@ export default function StreetSmartPage() {
                 className="card"
                 style={{ gap: 14, padding: "24px 20px", flex: "0 1 280px", minWidth: 220 }}
               >
-                <div style={{ width: 64, height: 64, borderRadius: 20, background: tier.accent, display: "grid", placeItems: "center", fontSize: "2rem", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)" }}>
-                  {tier.icon}
+                <div style={{ width: 64, height: 64, borderRadius: 20, background: tier.accent, display: "grid", placeItems: "center", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)" }}>
+                  <img src={tier.icon} alt="" width={36} height={36} />
                 </div>
                 <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.15rem" }}>{tier.title}</p>
                 <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".9rem", lineHeight: 1.6, flex: 1 }}>{tier.desc}</p>
