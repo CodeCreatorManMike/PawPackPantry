@@ -439,46 +439,103 @@ function OrderContent() {
 
       {/* Delivery expanded */}
       {sub === "delivery" && (
-        <div style={{ animation: "fade .3s ease", padding: "18px 20px", background: "var(--white)", borderRadius: 16, border: "2px solid var(--cream-deep)", display: "flex", flexDirection: "column", gap: 16 }}>
-          <div>
-            <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1rem", color: "var(--ink)", marginBottom: 4 }}>Door-to-Door Delivery</p>
-            <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>
-              Fresh orders delivered straight to your door every week across Mauritius — no pick-up required.
-            </p>
-          </div>
+        <div style={{ animation: "fade .3s ease", padding: "18px 20px", background: "var(--white)", borderRadius: 16, border: "2px solid var(--cream-deep)", display: "flex", flexDirection: "column", gap: 18 }}>
 
+          {/* Door-to-door */}
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".78rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Weekly Delivery Routes</p>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "var(--ink)", opacity: .7 }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="1" y="10" width="22" height="10" rx="2"/>
+                  <path d="M1 15h22"/>
+                  <path d="M7 20v2M17 20v2"/>
+                  <path d="M3 10V7l4-4h10l4 4v3"/>
+                  <circle cx="7" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+                  <circle cx="17" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".95rem", color: "var(--ink)" }}>Door-to-Door Delivery</p>
+            </div>
+            <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".85rem", lineHeight: 1.6 }}>
+              Delivered straight to your door every week. Order by Friday for your weekly slot.
+            </p>
             {[
-              { day: "Sunday Afternoon", area: "North & East Mauritius" },
-              { day: "Monday Morning", area: "Port Louis, Centre, West & South" },
+              { day: "Sunday", area: "East & North Mauritius", price: "North Rs 100 · East Rs 150" },
+              { day: "Monday", area: "Port Louis, West, Centre & South", price: "West/Centre/East Rs 150 · South Rs 200" },
             ].map(d => (
-              <div key={d.day} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 12, background: "var(--cream)", border: "2px solid var(--cream-deep)" }}>
-                <span style={{ fontSize: "1.2rem" }}>🚗</span>
+              <div key={d.day} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "10px 14px", borderRadius: 12, background: "var(--cream)", border: "2px solid var(--cream-deep)" }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: "var(--amber-soft)", display: "grid", placeItems: "center", flexShrink: 0, color: "var(--ink)" }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="1" y="10" width="22" height="10" rx="2"/>
+                    <path d="M1 15h22"/>
+                    <path d="M3 10V7l4-4h10l4 4v3"/>
+                    <circle cx="7" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+                    <circle cx="17" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+                  </svg>
+                </div>
                 <div>
                   <div style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".88rem", color: "var(--ink)" }}>{d.day}</div>
                   <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".78rem", color: "var(--ink-soft)" }}>{d.area}</div>
+                  <div style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: ".75rem", color: "var(--ink-soft)", marginTop: 2 }}>{d.price}</div>
                 </div>
               </div>
             ))}
           </div>
 
+          {/* Collection points */}
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".78rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Collection Options</p>
-            <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>
-              Prefer to collect? We offer collection directly from us in <strong style={{ color: "var(--ink)", fontWeight: 700 }}>Pereybere</strong>, plus convenient collection points throughout the island on select days.
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "var(--ink)", opacity: .7 }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </span>
+              <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".95rem", color: "var(--ink)" }}>Collection Points</p>
+            </div>
+            <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".85rem", lineHeight: 1.6 }}>
+              Collect from a convenient location near you — West/Centre/East areas Rs 100.
             </p>
+            {[
+              { day: "Sunday", spots: "Le Croisette Mall · Super U Flacq · Riverside" },
+              { day: "Monday", spots: "Bagatelle · Coeur De Ville · Super U Tamarin" },
+              { day: "Wednesday", spots: "All locations available" },
+            ].map(d => (
+              <div key={d.day} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "10px 14px", borderRadius: 12, background: "var(--cream)", border: "2px solid var(--cream-deep)" }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: "var(--sage-soft)", display: "grid", placeItems: "center", flexShrink: 0, color: "var(--ink)" }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".88rem", color: "var(--ink)" }}>{d.day}</div>
+                  <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".78rem", color: "var(--ink-soft)" }}>{d.spots}</div>
+                </div>
+              </div>
+            ))}
           </div>
 
+          {/* Collect from us */}
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <p style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".78rem", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-soft)" }}>Pricing</p>
-            <p style={{ fontFamily: "var(--font-body)", color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>
-              Delivery and collection fees vary by area and order size. Message us on WhatsApp for your exact quote and to confirm your preferred option.
-            </p>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ color: "var(--ink)", opacity: .7 }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+              </span>
+              <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".95rem", color: "var(--ink)" }}>Collect from Us</p>
+            </div>
+            <div style={{ padding: "10px 14px", borderRadius: 12, background: "var(--cream)", border: "2px solid var(--cream-deep)", display: "flex", flexDirection: "column", gap: 4 }}>
+              <div style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".88rem", color: "var(--ink)" }}>Pereybere, North</div>
+              <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".78rem", color: "var(--ink-soft)" }}>Mon – Thu: 7:30–10:10am &amp; 4:00–7:30pm</div>
+              <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".78rem", color: "var(--ink-soft)" }}>Sunday: 4:00–7:00pm</div>
+            </div>
           </div>
 
-          <a href="https://wa.me/23058233898?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20delivery%20and%20collection%20options%20and%20pricing" target="_blank" rel="noopener noreferrer" className="btn dark" style={{ fontSize: ".82rem", padding: "8px 16px", alignSelf: "flex-start", display: "inline-flex" }}>
-            Get delivery info on WhatsApp
+          <a href="https://wa.me/23058233898?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20delivery%20and%20collection%20options" target="_blank" rel="noopener noreferrer" className="btn dark" style={{ fontSize: ".82rem", padding: "8px 16px", alignSelf: "flex-start", display: "inline-flex" }}>
+            Confirm your delivery on WhatsApp
           </a>
         </div>
       )}
@@ -524,7 +581,7 @@ function StreetSmartContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, lineHeight: 1.7, color: "var(--ink-soft)", fontSize: ".95rem", maxWidth: "60ch" }}>
-        StreetSmart is our promise to the dogs and cats without a home. A share of every order goes directly to feeding and caring for strays — and you can contribute directly below.
+        StreetSmart is our initiative for the dogs and cats of Mauritius without a home. A share of every order goes directly to funding stray animal sterilisation, rehabilitation, rehoming, and raising awareness and education for animal wellbeing across the island — and you can contribute directly below.
       </p>
 
       <Link href="/streetsmart" className="btn dark" style={{ alignSelf: "flex-start", fontSize: ".85rem", padding: "9px 18px" }}>
@@ -597,12 +654,13 @@ function StreetSmartContent() {
    5. STRAY GALLERY
 ───────────────────────────────────────────── */
 const GALLERY_PHOTOS = [
-  "/photos/a44623a4-8ad2-438c-ad40-9b776a8a11b7.jpeg",
-  "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
-  "/photos/8be5cd36-1fbf-4ba3-9751-61940c6d9668.jpeg",
   "/stray-gallery/61c62691-bfde-4af3-aa98-6f38afd50224.JPG",
-  "/photos/78984ba1-b93c-45bd-be54-c44375d1c97e.jpeg",
-  "/photos/531928b0-640f-4313-98c8-8146a3d04fec.jpeg",
+  "/stray-gallery/38A6AEA4-9E2E-4BDF-8755-CC5381D9826E.jpg",
+  "/stray-gallery/7CF2FE1E-A841-454A-94DB-A8226BC6DC97.jpg",
+  "/stray-gallery/BA56CE3B-A9D3-42C9-B5D1-82A6D6E6C050.jpg",
+  "/stray-gallery/DA46A9E7-B5D5-498C-9C2C-E33482AFC3E4.jpg",
+  "/stray-gallery/IMG_5001.jpg",
+  "/stray-gallery/IMG_5770.jpg",
 ];
 
 function GalleryContent() {

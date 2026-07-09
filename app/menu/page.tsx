@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -21,7 +22,7 @@ type Category = {
   name: string;
   description: string;
   accent: string;
-  emoji: string;
+  icon: ReactNode;
   items: MenuItem[];
 };
 
@@ -30,7 +31,14 @@ const CATEGORIES: Category[] = [
     name: "The Pawfect Pawtions",
     description: "Gourmet Pet Meals Homemade to meet your pet's satisfaction & their nutrition needs. Made to order. Min weight per meal 250g.",
     accent: "var(--amber)",
-    emoji: "🍖",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 16c0 4 2.5 6 9 6s9-2 9-6"/>
+        <path d="M4 12h20"/>
+        <path d="M7 12c0-4 2.2-7 7-7s7 3 7 7"/>
+        <line x1="14" y1="5" x2="14" y2="7"/>
+      </svg>
+    ),
     items: [
       {
         subSection: "Pawfect Meals",
@@ -94,7 +102,13 @@ const CATEGORIES: Category[] = [
     name: "The Rawr Packs",
     description: "Prepacked & Frozen Raw Meals portioned for your pet. All meats/animal products are raw; vegetables are pre-steamed with bone broth. Packaged in vacuum-sealed bags and sold frozen. Min weight per meal 250g.",
     accent: "var(--neutral)",
-    emoji: "🥩",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 18c-1.5-1.5-1.5-4 0-5.5L16.5 2c1.5-1.5 4-1.5 5.5 0s1.5 4 0 5.5L11.5 18c-1.5 1.5-4 1.5-5.5 0z"/>
+        <path d="M19 9l2.5 2.5"/>
+        <path d="M6 18c0 0-3 2-3 4s2 2 3 3 3.5-1.5 3.5-3.5"/>
+      </svg>
+    ),
     items: [
       {
         name: "Coop-to-Bowl",
@@ -134,7 +148,14 @@ const CATEGORIES: Category[] = [
     name: "The Treat Pantry",
     description: "Homemade gourmet biscuits, pawsicles, jerky, chew sticks and more. Available in S / L bags.",
     accent: "var(--amber-soft)",
-    emoji: "🍪",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="10" width="20" height="14" rx="4"/>
+        <path d="M9 10V7a5 5 0 0 1 10 0v3"/>
+        <circle cx="11" cy="17" r="1.5" fill="currentColor" stroke="none"/>
+        <circle cx="17" cy="17" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
+    ),
     items: [
       {
         name: "Bone Appétit Biscuits",
@@ -184,7 +205,14 @@ const CATEGORIES: Category[] = [
     name: "The Pantry Staples",
     description: "Bone broth, gravies, sprinkles and healthy meal toppers — the perfect addition to any bowl.",
     accent: "var(--brown-dark)",
-    emoji: "✨",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10 4h8l1 4H9z"/>
+        <rect x="7" y="8" width="14" height="16" rx="3"/>
+        <line x1="12" y1="13" x2="16" y2="13"/>
+        <line x1="12" y1="17" x2="16" y2="17"/>
+      </svg>
+    ),
     items: [
       {
         name: "Bone Broth",
@@ -245,7 +273,13 @@ const CATEGORIES: Category[] = [
     name: "The Birfday Pantry",
     description: "Celebrate birthdays with pupcakes and special celebration feasts.",
     accent: "var(--amber)",
-    emoji: "🎂",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 3l2 5h5l-4 3.5 1.5 5.5L14 14l-4.5 3 1.5-5.5L7 8h5z"/>
+        <line x1="14" y1="14" x2="14" y2="25"/>
+        <path d="M9 25h10"/>
+      </svg>
+    ),
     items: [
       {
         name: "Mighty-Meaty Birfday Feast",
@@ -266,7 +300,15 @@ const CATEGORIES: Category[] = [
     name: "The Stray Packs",
     description: "Sponsor a stray as part of our StreetSmart Campaign. Funds stray feeding, sterilisation, rehabilitation and education across Mauritius.",
     accent: "var(--neutral)",
-    emoji: "🐾",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <ellipse cx="14" cy="20" rx="5" ry="4"/>
+        <ellipse cx="7" cy="13" rx="2.5" ry="3.5"/>
+        <ellipse cx="21" cy="13" rx="2.5" ry="3.5"/>
+        <ellipse cx="10" cy="8" rx="2" ry="2.5"/>
+        <ellipse cx="18" cy="8" rx="2" ry="2.5"/>
+      </svg>
+    ),
     items: [
       {
         name: "Sponsor a Meal for a Stray",
@@ -293,13 +335,13 @@ const CATEGORIES: Category[] = [
 /* ─── Item Card ─────────────────────────────── */
 function ItemCard({
   item,
-  emoji,
+  icon,
   accent,
   onAddToCart,
   onImageClick,
 }: {
   item: MenuItem;
-  emoji: string;
+  icon: ReactNode;
   accent: string;
   onAddToCart: (name: string, size: string, price: number) => void;
   onImageClick: (src: string) => void;
@@ -332,7 +374,7 @@ function ItemCard({
         {item.image ? (
           <Image src={item.image} alt={item.name} fill style={{ objectFit: "cover" }} sizes="100px" unoptimized />
         ) : (
-          <span style={{ opacity: .8 }}>{emoji}</span>
+          <span style={{ opacity: .8, color: "var(--ink)", width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center" }}>{icon}</span>
         )}
         {item.image && (
           <div style={{
@@ -557,7 +599,7 @@ export default function MenuPage() {
                 boxShadow: "0 12px 24px -14px rgba(74,53,40,.4)",
               }}>
                 <div style={{ position: "absolute", inset: 0, background: cat.accent, opacity: .72 }} />
-                <span style={{ position: "relative", fontSize: "2.4rem" }}>{cat.emoji}</span>
+                <span style={{ position: "relative", width: 40, height: 40, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink)", flexShrink: 0 }}>{cat.icon}</span>
                 <div style={{ position: "relative" }}>
                   <h2 style={{ fontSize: "1.6rem" }}>{cat.name}</h2>
                   <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".9rem", marginTop: 3 }}>{cat.description}</p>
@@ -580,7 +622,7 @@ export default function MenuPage() {
                       <ItemCard
                         key={item.name}
                         item={item}
-                        emoji={cat.emoji}
+                        icon={cat.icon}
                         accent={cat.accent}
                         onAddToCart={addToCart}
                         onImageClick={setLightboxSrc}

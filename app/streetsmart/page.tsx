@@ -16,19 +16,23 @@ export const metadata: Metadata = {
 };
 
 const MISSION_PHOTOS = [
-  "/photos/531928b0-640f-4313-98c8-8146a3d04fec.jpeg",
-  "/photos/32ddb287-f8b1-4342-829a-2690c297fc7c.jpeg",
-  "/photos/7527f766-5e85-46fa-bdf6-4d4b8e14ccfe.jpeg",
-  "/photos/78984ba1-b93c-45bd-be54-c44375d1c97e.jpeg",
-  "/photos/8be5cd36-1fbf-4ba3-9751-61940c6d9668.jpeg",
-  "/photos/97fa385b-8920-4791-999b-e04a4ab1fd6c.jpeg",
-  "/photos/a44623a4-8ad2-438c-ad40-9b776a8a11b7.jpeg",
-  "/photos/c0f29809-bfd6-471d-b0d3-eda21d793763.jpeg",
-  "/photos/c292e9fa-8575-4b78-9224-611d537066fb.jpeg",
-  "/photos/f17a7d19-abb9-48fe-8a6d-7cd378b3b637.jpeg",
-  "/photos/f2868212-5371-4506-8c89-19b4234ca303.jpeg",
-  "/photos/ffae3270-42f0-4f5b-b026-05b6c7d80a2d.jpeg",
-  "/photos/0ac3a345-2661-495f-bc94-83c0a96459c6.jpeg",
+  "/mission-gallery/539230c7-b5fb-475d-9389-a501e0b5faa1.JPG",
+  "/mission-gallery/686fc809-1538-4d32-8b7d-692667c31f78.JPG",
+  "/mission-gallery/954c683d-4ed7-4233-909a-53c6bd6ba2e0.JPG",
+  "/mission-gallery/9FE24C8C-120D-46AD-BCFF-612F09479E57.JPG",
+  "/mission-gallery/IMG_0426.jpg",
+  "/mission-gallery/IMG_2307.PNG",
+  "/mission-gallery/IMG_2310.PNG",
+  "/mission-gallery/IMG_2680.jpg",
+  "/mission-gallery/IMG_5071.jpg",
+  "/mission-gallery/IMG_7936.PNG",
+  "/mission-gallery/IMG_7937.PNG",
+  "/mission-gallery/IMG_7938.PNG",
+  "/mission-gallery/IMG_7976.PNG",
+  "/mission-gallery/IMG_8585.jpg",
+  "/mission-gallery/cc82b838-cd4c-4106-9891-12cf20f4196d.JPG",
+  "/mission-gallery/e7fbea07-a929-460a-bf1e-5c81263a60be.JPG",
+  "/mission-gallery/f38b1dc1-5c2a-4fd5-b233-3eea38f1d44e.JPG",
 ];
 
 const TESTIMONIES = [
@@ -151,16 +155,16 @@ export default function StreetSmartPage() {
             <p className="eyebrow" style={{ textAlign: "center" }}>Who we are</p>
             <h2 style={{ fontSize: "2.2rem", textAlign: "center" }}>Our mission goes beyond the bowl.</h2>
             <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
-              Founded by Destinee Ray Jones and Daniel Freitag, Paw Pack Pantry was created as a way to turn a lifelong passion for animal rescue into sustainable impact.
+              Paw Pack Pantry was started with one mission in mind — turning a lifelong passion for animal rescue into sustainable, lasting impact. Over our five years in Mauritius, we have rescued, rehabilitated, and rehomed over 100 strays between just the two of us. Imagine how many more we could reach with your help.
             </p>
             <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
-              A portion of every purchase is contributed directly to our StreetSmart Campaign, helping fund stray animal feeding programmes, sterilisation initiatives, medical care, rehabilitation efforts, and community education projects across Mauritius.
+              A portion of every purchase is contributed directly to our StreetSmart Campaign — funding stray animal feeding programmes, sterilisation initiatives, rehabilitation efforts, rehoming, and community education projects that raise awareness for animal wellbeing across Mauritius.
             </p>
             <p style={{ color: "var(--ink-soft)", fontWeight: 500, lineHeight: 1.8 }}>
-              By choosing Paw Pack Pantry, you&apos;re not only nourishing your own pet — you&apos;re helping create a better future for countless others still waiting for their second chance.
+              By choosing Paw Pack Pantry, you are not only nourishing your own pet — you are helping create a better future for countless animals still waiting for their second chance. We also look forward to working alongside fellow rescuers and organisations who share our vision for a more compassionate Mauritius.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4, justifyContent: "center" }}>
-              {["Feeding programmes", "Sterilisation", "Vet care", "Rehabilitation", "Community education"].map(t => (
+              {["Feeding", "Sterilisation", "Rehabilitation", "Rehoming", "Awareness & Education"].map(t => (
                 <span key={t} className="pill">{t}</span>
               ))}
             </div>
@@ -240,7 +244,7 @@ export default function StreetSmartPage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18, justifyItems: "stretch", maxWidth: 860, margin: "0 auto" }}>
             {SPONSOR_TIERS.map((tier, i) => (
               <div
                 key={tier.title}
