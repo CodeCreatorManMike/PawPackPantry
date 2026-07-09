@@ -192,13 +192,13 @@ function LeaveReviewForm() {
 /* ─────────────────────────────────────────────
    2. OUR PRODUCTS
 ───────────────────────────────────────────── */
-const MENU_PREVIEW: { name: string; cat: string; accent: string; icon: React.ReactNode }[] = [
-  { name: "Cluckin' Good Bowl",   cat: "The Pawfect Pawtions", accent: A.amberSoft, icon: <img src="/icons/pawfect-pawtions.svg" alt="" width={32} height={32} /> },
-  { name: "Beefy Bark Bowl",      cat: "The Pawfect Pawtions", accent: A.neutral,   icon: <img src="/icons/pawfect-pawtions.svg" alt="" width={32} height={32} /> },
-  { name: "Coop-to-Bowl (Raw)",   cat: "The Rawr Packs",       accent: A.warmGray,  icon: <img src="/icons/rawr-packs.svg"       alt="" width={32} height={32} /> },
-  { name: "Bone Appétit Biscuits",cat: "The Treat Pantry",     accent: A.amberSoft, icon: <img src="/icons/treat-pantry.svg"     alt="" width={32} height={32} /> },
-  { name: "Pupcakes",             cat: "The Birfday Pantry",   accent: A.neutral,   icon: <svg viewBox="0 0 28 28" fill="none" stroke="#4A3427" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:32,height:32}}><path d="M14 3l2 5h5l-4 3.5 1.5 5.5L14 14l-4.5 3 1.5-5.5L7 8h5z"/><line x1="14" y1="14" x2="14" y2="25"/><path d="M9 25h10"/></svg> },
-  { name: "Bone Broth",           cat: "The Pantry Staples",   accent: A.warmGray,  icon: <img src="/icons/pantry-staples.svg"   alt="" width={32} height={32} /> },
+const MENU_PREVIEW: { name: string; cat: string; accent: string; image: string }[] = [
+  { name: "Cluckin' Good Bowl",    cat: "The Pawfect Pawtions", accent: A.amberSoft, image: "/products/cluckin-good-bowl.png" },
+  { name: "Beefy Bark Bowl",       cat: "The Pawfect Pawtions", accent: A.neutral,   image: "/products/beefy-bark-bowl.png" },
+  { name: "Coop-to-Bowl (Raw)",    cat: "The Rawr Packs",       accent: A.warmGray,  image: "/products/coop-to-bowl.png" },
+  { name: "Bone Appétit Biscuits", cat: "The Treat Pantry",     accent: A.amberSoft, image: "/products/bone-appetit-biscuits.png" },
+  { name: "Pupcakes",              cat: "The Birfday Pantry",   accent: A.neutral,   image: "/products/pupcakes.png" },
+  { name: "Bone Broth",            cat: "The Pantry Staples",   accent: A.warmGray,  image: "/products/bone-broth.png" },
 ];
 
 const REVIEWS = [
@@ -254,8 +254,8 @@ function ProductsContent() {
             {MENU_PREVIEW.map((m, i) => (
               <Link key={i} href="/menu" style={{ textDecoration: "none" }}>
                 <div className="card" style={{ gap: 0, padding: 0, overflow: "hidden", cursor: "pointer" }}>
-                  <div style={{ aspectRatio: "4/3", background: m.accent, display: "flex", alignItems: "center", justifyContent: "center", opacity: 0.85 }}>
-                    <span style={{ color: "var(--ink)", transform: "scale(1.6)", display: "flex" }}>{m.icon}</span>
+                  <div style={{ aspectRatio: "4/3", background: m.accent, position: "relative", overflow: "hidden" }}>
+                    <Image src={m.image} alt={m.name} fill style={{ objectFit: "cover" }} sizes="(max-width:600px) 50vw, 25vw" />
                   </div>
                   <div style={{ padding: "10px 12px 12px", display: "flex", flexDirection: "column", gap: 4, background: "var(--white)" }}>
                     <div style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".82rem", color: "var(--ink)", lineHeight: 1.2 }}>{m.name}</div>
@@ -323,9 +323,9 @@ function ProductsContent() {
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 10 }}>
           {[
-            { title: "A Meal for a Stray", desc: "Fund one meal for a stray on the island.", price: "Rs 65", accent: A.amberSoft },
-            { title: "Sponsor Meals for a Month", desc: "Cover thirty meals for one stray.", price: "Rs 950", accent: A.neutral },
-            { title: "StreetSmart Starter Pack", desc: "Vet check, deworming & sterilisation.", price: "Rs 1,500", accent: A.neutralSoft },
+            { title: "A Meal for a Stray", desc: "Fund one meal for a stray on the island.", price: "Rs 65", accent: A.amberSoft, icon: "/icons/sponsor-a-meal.svg" },
+            { title: "Sponsor Meals for a Month", desc: "Cover thirty meals for one stray.", price: "Rs 950", accent: A.neutral, icon: "/icons/sponsor-1-month.svg" },
+            { title: "StreetSmart Starter Pack", desc: "Vet check, deworming & sterilisation.", price: "Rs 1,500", accent: A.neutralSoft, icon: "/icons/streetsmart-starter.svg" },
           ].map(p => (
             <a
               key={p.title}
@@ -339,6 +339,7 @@ function ProductsContent() {
                 boxShadow: "0 6px 14px -8px rgba(68,49,43,.28)",
               }}
             >
+              <img src={p.icon} alt="" width={28} height={28} style={{ marginBottom: 2 }} />
               <span style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".88rem", color: "var(--ink)", lineHeight: 1.2 }}>{p.title}</span>
               <span style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: ".75rem", color: "var(--ink-soft)", lineHeight: 1.4 }}>{p.desc}</span>
               <span style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".82rem", color: "var(--ink)", marginTop: "auto" }}>{p.price}</span>
