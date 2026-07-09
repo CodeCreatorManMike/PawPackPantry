@@ -193,12 +193,12 @@ function LeaveReviewForm() {
    2. OUR PRODUCTS
 ───────────────────────────────────────────── */
 const MENU_PREVIEW = [
-  { name: "Cluckin' Good Bowl", cat: "The Pawfect Pawtions", accent: A.amberSoft },
-  { name: "Beefy Bark Bowl", cat: "The Pawfect Pawtions", accent: A.neutral },
-  { name: "Coop-to-Bowl (Raw)", cat: "The Rawr Packs", accent: A.warmGray },
-  { name: "Bone Appétit Biscuits", cat: "The Treat Pantry", accent: A.amberSoft },
-  { name: "Pupcakes", cat: "The Birfday Pantry", accent: A.neutral },
-  { name: "Bone Broth", cat: "The Pantry Staples", accent: A.warmGray },
+  { name: "Cluckin' Good Bowl", cat: "The Pawfect Pawtions", accent: A.amberSoft, image: "/products/cluckin-good-bowl.png" },
+  { name: "Beefy Bark Bowl", cat: "The Pawfect Pawtions", accent: A.neutral, image: "/products/beefy-bark-bowl.png" },
+  { name: "Coop-to-Bowl (Raw)", cat: "The Rawr Packs", accent: A.warmGray, image: "/products/coop-to-bowl.png" },
+  { name: "Bone Appétit Biscuits", cat: "The Treat Pantry", accent: A.amberSoft, image: "/products/bone-appetit-biscuits.png" },
+  { name: "Pupcakes", cat: "The Birfday Pantry", accent: A.neutral, image: "/products/pupcakes.png" },
+  { name: "Bone Broth", cat: "The Pantry Staples", accent: A.warmGray, image: "/products/bone-broth.png" },
 ];
 
 const REVIEWS = [
@@ -245,8 +245,8 @@ function ProductsContent() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(148px, 1fr))", gap: 12 }}>
             {MENU_PREVIEW.map((m, i) => (
               <div key={i} className="card" style={{ gap: 8 }}>
-                <div style={{ height: 68, borderRadius: 12, background: m.accent, display: "grid", placeItems: "center" }}>
-                  <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,.5)" }} />
+                <div style={{ height: 68, borderRadius: 12, background: m.accent, overflow: "hidden", position: "relative" }}>
+                  <Image src={m.image} alt={m.name} fill style={{ objectFit: "contain" }} sizes="148px" unoptimized />
                 </div>
                 <div style={{ fontFamily: "var(--font-head)", fontWeight: 600, fontSize: ".9rem", color: "var(--ink)" }}>{m.name}</div>
                 <span className="pill">{m.cat}</span>
@@ -314,10 +314,9 @@ function ProductsContent() {
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 10 }}>
           {[
-            { title: "A Meal for a Stray", desc: "Fund one meal for a stray on the island.", price: "Rs ___", accent: A.amberSoft },
-            { title: "Feed a Stray for a Month", desc: "Cover a full month of meals for one stray.", price: "Rs ___", accent: A.neutral },
-            { title: "Adopt & Sponsor", desc: "Follow a named stray and fund their ongoing care.", price: "Rs ___ / mo", accent: A.warmGray },
-            { title: "StreetSmart Starter Pack", desc: "Sterilisation, de-worming & vet check-up.", price: "Rs ___", accent: A.neutralSoft },
+            { title: "A Meal for a Stray", desc: "Fund one meal for a stray on the island.", price: "Rs 65", accent: A.amberSoft },
+            { title: "Sponsor Meals for a Month", desc: "Cover thirty meals for one stray.", price: "Rs 950", accent: A.neutral },
+            { title: "StreetSmart Starter Pack", desc: "Vet check, deworming & sterilisation.", price: "Rs 1,500", accent: A.neutralSoft },
           ].map(p => (
             <a
               key={p.title}
@@ -497,19 +496,19 @@ const SS_WIDGETS = [
     id: "pack" as const,
     title: "StreetSmart Starter Pack",
     subtitle: "Full stray care — one complete package",
-    info: "The StreetSmart Starter Pack is our most comprehensive sponsorship option. It covers the cost of sterilisation, de-worming and a full vet check-up for one stray animal. These three interventions together are life-changing — sterilisation helps control the growing stray population, de-worming addresses one of the most common and uncomfortable health issues strays face, and a vet check-up ensures any underlying conditions are identified and treated. Pricing: Rs ___ (contact us to arrange).",
+    info: "The StreetSmart Starter Pack is our most comprehensive sponsorship option. It covers the cost of sterilisation, de-worming and a full vet check-up for one stray animal. These three interventions together are life-changing — sterilisation helps control the growing stray population, de-worming addresses one of the most common and uncomfortable health issues strays face, and a vet check-up ensures any underlying conditions are identified and treated. Pricing: Rs 1,500 (contact us to arrange).",
   },
   {
     id: "monthly" as const,
     title: "Sponsor a Monthly Meal",
     subtitle: "Once-off or recurring monthly support",
-    info: "Choose to sponsor a stray's monthly meals as a once-off contribution or set up a recurring monthly subscription. Your sponsorship covers a full month of nutritious meals for one named stray animal. You'll receive a monthly update on the stray you're sponsoring. Pricing: Rs ___ / month (contact us to arrange).",
+    info: "Choose to sponsor a stray's monthly meals as a once-off contribution or set up a recurring monthly subscription. Your sponsorship covers a full month of nutritious meals for one named stray animal. You'll receive a monthly update on the stray you're sponsoring. Pricing: Rs 950 / month (contact us to arrange).",
   },
   {
     id: "meal" as const,
     title: "A Meal for a Stray",
     subtitle: "One meal, one belly filled",
-    info: "The simplest way to make a difference — sponsor one single meal for a stray animal on the island. Every contribution, no matter how small, adds up. Your meal donation goes directly to feeding a stray dog or cat. Pricing: Rs ___ per meal (contact us to arrange).",
+    info: "The simplest way to make a difference — sponsor one single meal for a stray animal on the island. Every contribution, no matter how small, adds up. Your meal donation goes directly to feeding a stray dog or cat. Pricing: Rs 65 per meal (contact us to arrange).",
   },
   {
     id: "campaign" as const,
@@ -807,7 +806,7 @@ type Section = {
 
 const SECTIONS: Section[] = [
   { key: "about",       accent: A.amberSoft,    icon: I.heart,  title: "About Us",             sub: "Our story & mission",               content: <AboutContent />,       fullPage: undefined },
-  { key: "products",    accent: A.amber,        icon: I.bowl,   title: "Our Products",         sub: "Menu · Reviews · Meal breakdown",   content: <ProductsContent />,    fullPage: "/menu" },
+  { key: "products",    accent: A.amber,        icon: I.bowl,   title: "Our Products",         sub: "Menu · Reviews",                    content: <ProductsContent />,    fullPage: "/menu" },
   { key: "order",       accent: A.neutral,      icon: I.cart,   title: "Place an Order",       sub: "How to order · Delivery · WhatsApp", content: <OrderContent />,      fullPage: undefined },
   { key: "streetsmart", accent: A.brownDark,    icon: I.mega,   title: "StreetSmart Campaign", sub: "Sponsor a stray · Latest campaign", content: <StreetSmartContent />, fullPage: "/streetsmart" },
   { key: "gallery",     accent: A.warmGray,     icon: I.camera, title: "Stray Gallery",        sub: "Rescue stories & happy pups",       content: <GalleryContent />,     fullPage: "/gallery" },

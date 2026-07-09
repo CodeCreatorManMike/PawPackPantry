@@ -123,21 +123,21 @@ export default async function GalleryPage() {
             <p className="eyebrow">The humans behind the mission</p>
             <h2 style={{ fontSize: "2rem", marginTop: 6 }}>Meet the Founders</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 18, maxWidth: 720, margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 14, maxWidth: 720, margin: "0 auto" }}>
             {FOUNDERS.map((f, i) => (
               <div
                 key={f.name}
                 className="card"
-                style={{ alignItems: "center", gap: 16, padding: "28px 20px", textAlign: "center" }}
+                style={{ alignItems: "center", gap: 12, padding: "20px 16px", textAlign: "center" }}
               >
-                <div style={{ width: 80, height: 80, borderRadius: "50%", overflow: "hidden", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", position: "relative", flexShrink: 0 }}>
-                  <Image src={f.image} alt={f.name} fill style={{ objectFit: "cover", objectPosition: "top" }} sizes="80px" />
+                <div style={{ width: 72, height: 72, borderRadius: "50%", overflow: "hidden", border: "4px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", position: "relative", flexShrink: 0 }}>
+                  <Image src={f.image} alt={f.name} fill priority={i === 0} style={{ objectFit: "cover", objectPosition: "top" }} sizes="72px" />
                 </div>
                 <div>
-                  <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.25rem" }}>{f.name}</p>
+                  <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.1rem" }}>{f.name}</p>
                   <span className="pill" style={{ marginTop: 4 }}>{f.role}</span>
                 </div>
-                <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>{f.bio}</p>
+                <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".85rem", lineHeight: 1.6 }}>{f.bio}</p>
               </div>
             ))}
           </div>
@@ -149,21 +149,21 @@ export default async function GalleryPage() {
             <p className="eyebrow">The crew behind the kitchen</p>
             <h2 style={{ fontSize: "2rem", marginTop: 6 }}>Meet the Team</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))", gap: 18 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 14 }}>
             {TEAM.map((m, i) => (
               <div
                 key={m.name}
                 className="card"
-                style={{ textAlign: "center", alignItems: "center", gap: 12, padding: "24px 16px" }}
+                style={{ textAlign: "center", alignItems: "center", gap: 10, padding: "18px 12px" }}
               >
-                <div style={{ width: 80, height: 80, borderRadius: "50%", overflow: "hidden", border: "5px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", position: "relative", flexShrink: 0 }}>
-                  <Image src={m.image} alt={m.name} fill style={{ objectFit: "cover", objectPosition: "top" }} sizes="80px" />
+                <div style={{ width: 64, height: 64, borderRadius: "50%", overflow: "hidden", border: "4px solid var(--white)", boxShadow: "0 8px 20px -10px rgba(74,53,40,.35)", position: "relative", flexShrink: 0 }}>
+                  <Image src={m.image} alt={m.name} fill style={{ objectFit: "cover", objectPosition: "top" }} sizes="64px" />
                 </div>
                 <div>
-                  <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.3rem" }}>{m.name}</p>
+                  <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.05rem" }}>{m.name}</p>
                   <span className="pill" style={{ marginTop: 4 }}>{m.role}</span>
                 </div>
-                <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".88rem", lineHeight: 1.6 }}>{m.bio}</p>
+                <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".8rem", lineHeight: 1.55, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical" }}>{m.bio}</p>
               </div>
             ))}
           </div>

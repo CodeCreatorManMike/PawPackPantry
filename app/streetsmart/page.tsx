@@ -42,7 +42,7 @@ const TESTIMONIES = [
     name: "Camille & Michel Chui Chun Lam",
     short: "Destiny and Dan are exceptional fosters. They prepared Lupita for life with a forever family — calm, confident, and wonderfully social. Whenever we had questions they were always just a phone call away. Thank you for giving her such a wonderful start in life.",
     accent: "var(--peach-soft)",
-    image: "/photos/7527f766-5e85-46fa-bdf6-4d4b8e14ccfe.jpeg",
+    image: "/testimonials/lupita.jpg",
   },
   {
     name: "Vaanes Bacheccy",
@@ -75,24 +75,21 @@ const SPONSOR_TIERS = [
     icon: "🍽️",
     title: "A Meal for a Stray",
     desc: "Fund one nutritious meal for a stray on the island. Every belly filled is a step forward.",
+    price: "Rs 65",
     accent: "var(--blush)",
   },
   {
     icon: "📅",
-    title: "Feed a Stray for a Month",
-    desc: "Cover a stray's full monthly food supply — consistent nutrition makes a real difference.",
+    title: "Sponsor Meals for a Month",
+    desc: "Pay for thirty meals for a stray of Mauritius — consistent nutrition makes a real difference.",
+    price: "Rs 950",
     accent: "var(--peach)",
-  },
-  {
-    icon: "❤️",
-    title: "Adopt & Sponsor Monthly Meals",
-    desc: "Follow a named stray and fund their ongoing care. You'll receive updates on your sponsored pup.",
-    accent: "var(--sage)",
   },
   {
     icon: "🏥",
     title: "StreetSmart Starter Pack",
-    desc: "The full package — covers sterilisation, de-worming and a vet check-up for one stray. Life-changing.",
+    desc: "Pay to have one stray vet checked, dewormed & sterilised. Life-changing care.",
+    price: "Rs 1,500",
     accent: "var(--sky)",
   },
 ];
@@ -261,7 +258,7 @@ export default function StreetSmartPage() {
                   className="btn"
                   style={{ textAlign: "center", background: tier.accent, fontSize: ".9rem", padding: "10px 18px", marginTop: "auto" }}
                 >
-                  Sponsor Now — Rs ___
+                  Sponsor Now — {tier.price}
                 </a>
               </div>
             ))}
