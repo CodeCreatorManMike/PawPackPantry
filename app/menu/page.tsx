@@ -12,6 +12,7 @@ type CartItem = { key: string; name: string; size: string; price: number; qty: n
 type MenuItem = {
   name: string;
   desc: string;
+  flavours?: string;
   ingredients: string[];
   subSection?: string;
   sizes: SizeOption[];
@@ -121,6 +122,7 @@ const CATEGORIES: Category[] = [
       },
       {
         name: "Build Your Own Rawr Pack",
+        image: "/products/build-your-own-rawr-pack.png",
         desc: "Choose your own ingredients from our pantry — we portion and pack it for you. Message us what you’d like included.",
         sizes: [{ label: "250g", price: 250 }, { label: "500g", price: 360 }, { label: "750g", price: 490 }, { label: "1kg", price: 650 }],
         ingredients: [
@@ -141,7 +143,8 @@ const CATEGORIES: Category[] = [
       {
         name: "Bone Appétit Biscuits",
         image: "/products/bone-appetit-biscuits.png",
-        desc: "Homemade gourmet pet biscuits in a variety of flavours picked monthly. Flavours: Chicken, Carrot & Zucchini / Peanut Butter & Pumpkin / Blueberry, Banana & Oat.",
+        desc: "Homemade gourmet pet biscuits in a variety of flavours picked monthly.",
+        flavours: "Chicken, Carrot & Zucchini · Peanut Butter & Pumpkin · Blueberry, Banana & Oat",
         sizes: [{ label: "S", price: 250 }, { label: "L", price: 350 }],
         ingredients: ["Whole wheat flour", "Rolled oats", "Egg", "Chicken broth or blueberries", "Carrot or pumpkin purée", "Banana purée", "Natural peanut butter", "Water"],
       },
@@ -149,20 +152,23 @@ const CATEGORIES: Category[] = [
         name: "Fishy Fin Biscuits",
         image: "/products/fishy-fin-biscuits.png",
         desc: "Homemade gourmet tuna biscuits — a fish lover’s dream.",
+        flavours: "Tuna",
         sizes: [{ label: "S", price: 260 }, { label: "L", price: 410 }],
         ingredients: ["Tuna", "Egg", "Oats", "Whole wheat flour"],
       },
       {
         name: "’Good Dog!’ Sweethearts",
         image: "/products/good-dog-sweethearts.png",
-        desc: "Heart-shaped biscuits in a variety of flavours picked monthly. Flavours: Blueberry, Banana & Oat / Peanut Butter & Oat.",
+        desc: "Heart-shaped biscuits in a variety of flavours picked monthly.",
+        flavours: "Blueberry, Banana & Oat · Peanut Butter & Oat",
         sizes: [{ label: "S", price: 230 }, { label: "L", price: 360 }],
         ingredients: ["Whole wheat flour", "Rolled oats", "Banana purée", "Blueberries", "Large egg", "Natural peanut butter", "Water"],
       },
       {
         name: "Pawsicles",
         image: "/products/pawsicles.png",
-        desc: "Homemade gourmet pet popsicles, set with gelatin and served chilled. Flavours: Blueberry & Banana / Pumpkin & Carrot.",
+        desc: "Homemade gourmet pet popsicles, set with gelatin and served chilled.",
+        flavours: "Blueberry & Banana · Pumpkin & Carrot",
         sizes: [{ label: "S", price: 280 }, { label: "L", price: 500 }],
         ingredients: ["Blueberries / Carrot", "Banana purée / Pumpkin purée", "Greek yogurt", "Gelatin", "Water"],
       },
@@ -170,6 +176,7 @@ const CATEGORIES: Category[] = [
         name: "Chicken Jerky",
         image: "/products/chicken-jerky.png",
         desc: "Homemade gourmet chicken jerky — chewy, delicious and packed with protein.",
+        flavours: "Chicken",
         sizes: [{ label: "One size", price: 340 }],
         ingredients: ["Chicken", "Apple cider vinegar"],
       },
@@ -212,7 +219,8 @@ const CATEGORIES: Category[] = [
       {
         name: "Training Treats",
         image: "/products/training-treats.png",
-        desc: "Homemade gourmet training treats in a variety of flavours — Chicken, Beef or Tuna.",
+        desc: "Homemade gourmet training treats in a variety of flavours.",
+        flavours: "Chicken · Beef · Tuna",
         sizes: [{ label: "XS", price: 125 }, { label: "S", price: 250 }, { label: "L", price: 300 }],
         ingredients: [
           "Chicken: whole wheat flour, rolled oats, chicken pate, egg, chicken broth",
@@ -257,6 +265,7 @@ const CATEGORIES: Category[] = [
     items: [
       {
         name: "Mighty-Meaty Birfday Feast",
+        image: "/products/mighty-meaty-birfday-feast.png",
         desc: "A selection of meat portions bundled into a mighty meat feast for your pet’s special day. Available raw or cooked. Min feast weight 200g.",
         sizes: [{ label: "One size", price: 395 }],
         ingredients: ["Pawfect steak", "Pig feet", "Chicken feet/necks", "Beef balls", "Beef chunks", "Shredded chicken", "Chicken/beef liver", "Chicken organs", "Sardines", "Mackerel", "Tuna"],
@@ -348,6 +357,18 @@ function ItemCard({
       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 5, minWidth: 0 }}>
         <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: "1.02rem", lineHeight: 1.2 }}>{item.name}</p>
         <p style={{ color: "var(--ink-soft)", fontWeight: 500, fontSize: ".84rem", lineHeight: 1.5 }}>{item.desc}</p>
+
+        {item.flavours && (
+          <p style={{ fontFamily: "var(--font-head)", fontWeight: 700, fontSize: ".78rem", color: "var(--ink)", lineHeight: 1.5 }}>
+            <span style={{ color: "var(--ink-soft)", fontWeight: 500 }}>Flavours: </span>
+            {item.flavours.split(" · ").map((f, i, arr) => (
+              <span key={i}>
+                <span style={{ color: "var(--amber)", fontWeight: 700 }}>{f}</span>
+                {i < arr.length - 1 && <span style={{ color: "var(--ink-soft)", fontWeight: 400 }}> · </span>}
+              </span>
+            ))}
+          </p>
+        )}
 
         {/* size selector */}
         {multiSize && (

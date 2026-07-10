@@ -591,7 +591,7 @@ function StreetSmartContent() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <p style={{ fontFamily: "var(--font-body)", fontWeight: 500, lineHeight: 1.7, color: "var(--ink-soft)", fontSize: ".95rem", maxWidth: "60ch" }}>
-        StreetSmart is our initiative for the dogs and cats of Mauritius without a home. A share of every order goes directly to funding stray animal sterilisation, rehabilitation, rehoming, and raising awareness and education for animal wellbeing across the island — and you can contribute directly below.
+        StreetSmart is our initiative for the dogs and cats of Mauritius without a home. A portion of every purchase is contributed directly to our StreetSmart Campaign — funding stray animal feeding programmes, sterilisation initiatives, rehabilitation efforts, rehoming, and community education projects that raise awareness for animal wellbeing across Mauritius. You can also contribute directly below.
       </p>
 
       <Link href="/streetsmart" className="btn dark" style={{ alignSelf: "flex-start", fontSize: ".85rem", padding: "9px 18px" }}>
