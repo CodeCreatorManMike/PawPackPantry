@@ -1,21 +1,26 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
+import type { InvoiceRow } from "@/lib/supabase";
+import InvoiceManager from "@/components/InvoiceManager";
 
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "";
-
-type Tab = "news" | "menu" | "gallery" | "subscribers";
+type Tab = "news" | "menu" | "gallery" | "subscribers" | "invoices";
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
   const [pw, setPw] = useState("");
   const [tab, setTab] = useState<Tab>("news");
-  const [data, setData] = useState<Record<string, unknown[]>>({ news: [], menu: [], gallery: [], subscribers: [] });
+  const [data, setData] = useState<Record<string, unknown[]>>({ news: [], menu: [], gallery: [], subscribers: [], invoices: [] });
   const [msg, setMsg] = useState("");
 
-  function login(e: React.FormEvent) {
+  async function login(e: React.FormEvent) {
     e.preventDefault();
-    if (pw === ADMIN_PASSWORD && ADMIN_PASSWORD !== "") {
+    const res = await fetch("/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: pw }),
+    });
+    if (res.ok) {
       setAuthed(true);
       sessionStorage.setItem("ppp-admin", "1");
     } else {
@@ -23,28 +28,44 @@ export default function AdminPage() {
     }
   }
 
+  async function signOut() {
+    await fetch("/api/admin/logout", { method: "POST" });
+    sessionStorage.removeItem("ppp-admin");
+    setAuthed(false);
+  }
+
   useEffect(() => {
     if (sessionStorage.getItem("ppp-admin") === "1") setAuthed(true);
   }, []);
 
+  const load = useCallback(async () => {
+    const [news, menu, gallery, subs, invoicesRes] = await Promise.all([
+      supabase.from("news_posts").select("*").order("date", { ascending: false }),
+      supabase.from("menu_items").select("*").order("category"),
+      supabase.from("gallery_items").select("*").order("created_at", { ascending: false }),
+      supabase.from("newsletter_subscribers").select("id,email,created_at").order("created_at", { ascending: false }),
+      fetch("/api/invoices"),
+    ]);
+    if (invoicesRes.status === 401) {
+      // Session cookie expired or missing — bounce back to the login screen.
+      sessionStorage.removeItem("ppp-admin");
+      setAuthed(false);
+      return;
+    }
+    const invoicesJson = await invoicesRes.json().catch(() => ({ invoices: [] }));
+    setData({
+      news: news.data ?? [],
+      menu: menu.data ?? [],
+      gallery: gallery.data ?? [],
+      subscribers: subs.data ?? [],
+      invoices: invoicesJson.invoices ?? [],
+    });
+  }, []);
+
   useEffect(() => {
     if (!authed) return;
-    async function load() {
-      const [news, menu, gallery, subs] = await Promise.all([
-        supabase.from("news_posts").select("*").order("date", { ascending: false }),
-        supabase.from("menu_items").select("*").order("category"),
-        supabase.from("gallery_items").select("*").order("created_at", { ascending: false }),
-        supabase.from("newsletter_subscribers").select("id,email,created_at").order("created_at", { ascending: false }),
-      ]);
-      setData({
-        news: news.data ?? [],
-        menu: menu.data ?? [],
-        gallery: gallery.data ?? [],
-        subscribers: subs.data ?? [],
-      });
-    }
     load();
-  }, [authed]);
+  }, [authed, load]);
 
   if (!authed) {
     return (
@@ -70,6 +91,7 @@ export default function AdminPage() {
     { id: "menu", label: "🍖 Menu Items" },
     { id: "gallery", label: "📸 Gallery" },
     { id: "subscribers", label: "📧 Subscribers" },
+    { id: "invoices", label: "🧾 Invoices" },
   ];
 
   async function togglePublished(id: string, current: boolean) {
@@ -98,7 +120,7 @@ export default function AdminPage() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
           <h1 style={{ fontFamily: "var(--font-head)", fontSize: "1.8rem" }}>🐾 Paw Pack Pantry — Admin</h1>
           <button
-            onClick={() => { sessionStorage.removeItem("ppp-admin"); setAuthed(false); }}
+            onClick={signOut}
             className="btn ghost"
             style={{ fontSize: ".85rem", padding: "8px 16px" }}
           >
@@ -239,6 +261,11 @@ export default function AdminPage() {
                   {data.subscribers.length === 0 && <tr><td colSpan={3} style={{ ...cell, textAlign: "center", color: "var(--ink-soft)", padding: 32 }}>No subscribers yet.</td></tr>}
                 </tbody>
               </table>
+            )}
+
+            {/* INVOICES */}
+            {tab === "invoices" && (
+              <InvoiceManager invoices={data.invoices as InvoiceRow[]} onSaved={load} />
             )}
           </div>
         </div>

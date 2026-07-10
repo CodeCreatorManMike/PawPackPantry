@@ -55,3 +55,20 @@ export type Review = {
   approved: boolean;
   created_at: string;
 };
+
+export type InvoiceRow = {
+  id: string;
+  invoice_no: number;
+  customer_name: string;
+  pet_name: string | null;
+  contact_number: string | null;
+  address: string | null;
+  delivery_date: string | null;
+  issue_date: string;
+  items: { id: string; description: string; size: string; unitPrice: number; qty: number }[];
+  delivery_fee: number;
+  is_preorder: boolean;
+  reference: string | null;
+  source: "manual" | "whatsapp";
+  created_at: string;
+};

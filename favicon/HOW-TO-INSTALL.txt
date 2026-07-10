@@ -1,0 +1,25 @@
+Paw Pack Pantry — tab icon (favicon)
+====================================
+
+Files in this folder:
+  favicon.ico            multi-size .ico (16/32/48) — the classic tab icon
+  favicon.svg            crisp vector version (scales to any size)
+  favicon-16x16.png      browser tab
+  favicon-32x32.png      browser tab / bookmarks (retina)
+  favicon-48x48.png      Windows / shortcuts
+  favicon-512x512.png    PWA / large icon
+  apple-touch-icon.png   iOS home-screen (180x180, full-bleed)
+
+INSTALL
+-------
+1. Upload all files to the ROOT of your site (same folder as index.html).
+2. Paste this inside the <head> of every page:
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+3. Hard-refresh (Cmd/Ctrl+Shift+R). Favicons cache aggressively — you may
+   need to close and reopen the tab to see it update.

@@ -45,6 +45,24 @@ create table if not exists gallery_items (
   created_at timestamptz default now()
 );
 
+-- Invoices
+create table if not exists invoices (
+  id uuid primary key default gen_random_uuid(),
+  invoice_no bigint generated always as identity,
+  customer_name text not null,
+  pet_name text,
+  contact_number text,
+  address text,
+  delivery_date text,
+  issue_date date not null default current_date,
+  items jsonb not null default '[]',
+  delivery_fee numeric not null default 0,
+  is_preorder boolean not null default true,
+  reference text,
+  source text not null default 'manual', -- 'manual' (admin UI) or 'whatsapp' (automated webhook)
+  created_at timestamptz default now()
+);
+
 -- =============================================
 -- Row Level Security (read-only for anon users)
 -- =============================================
@@ -53,6 +71,13 @@ alter table newsletter_subscribers enable row level security;
 alter table news_posts enable row level security;
 alter table menu_items enable row level security;
 alter table gallery_items enable row level security;
+alter table invoices enable row level security;
+
+-- Invoices hold customer PII (names, phone numbers, addresses) — no anon/authenticated
+-- policy is defined for this table on purpose, so RLS blocks the public REST API entirely.
+-- All reads/writes go through app/api/invoices/* and app/api/orders/whatsapp/*, which use
+-- the service-role key (SUPABASE_SERVICE_ROLE_KEY, server-only) to bypass RLS after checking
+-- either the admin session cookie or the WhatsApp webhook secret.
 
 -- Anyone can read published posts / active items
 create policy "read published posts" on news_posts for select using (published = true);
