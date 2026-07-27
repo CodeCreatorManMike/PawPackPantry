@@ -44,6 +44,7 @@ export default function InvoiceManager({ invoices, onSaved }: { invoices: Invoic
   const [items, setItems] = useState<InvoiceLineItem[]>([]);
   const [preview, setPreview] = useState<InvoiceRecord | null>(null);
   const [saving, setSaving] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const [error, setError] = useState("");
 
   const itemsInCategory = useMemo(() => CATALOG.filter(i => i.category === category), [category]);
@@ -135,11 +136,34 @@ export default function InvoiceManager({ invoices, onSaved }: { invoices: Invoic
     onSaved();
   }
 
+  async function downloadPdf() {
+    if (!preview) return;
+    setDownloading(true);
+    try {
+      const node = document.querySelector<HTMLElement>(".invoice-print-area");
+      if (!node) return;
+      const { default: html2canvas } = await import("html2canvas-pro");
+      const { default: jsPDF } = await import("jspdf");
+
+      const canvas = await html2canvas(node, { scale: 2, backgroundColor: "#ffffff" });
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF({ unit: "px", format: [canvas.width, canvas.height] });
+      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+      pdf.save(`invoice-${formatInvoiceNo(preview.invoice_no)}.pdf`);
+    } finally {
+      setDownloading(false);
+    }
+  }
+
   if (preview) {
     return (
       <div>
         <div className="no-print" style={{ display: "flex", gap: 10, marginBottom: 20, padding: "0 20px" }}>
-          <button onClick={() => window.print()} className="btn sage" style={{ fontSize: ".85rem", padding: "9px 18px" }}>🖨️ Print / Save as PDF</button>
+          <button onClick={() => window.print()} className="btn sage" style={{ fontSize: ".85rem", padding: "9px 18px" }}>🖨️ Print</button>
+          <button onClick={downloadPdf} disabled={downloading} className="btn ghost" style={{ fontSize: ".85rem", padding: "9px 18px" }}>
+            {downloading ? "Generating…" : "⬇️ Save as PDF"}
+          </button>
           <button onClick={() => setPreview(null)} className="btn ghost" style={{ fontSize: ".85rem", padding: "9px 18px" }}>← Back to invoices</button>
         </div>
         <InvoiceDocument invoice={preview} />
