@@ -167,6 +167,11 @@ NEXT_PUBLIC_ADMIN_PASSWORD=PawPack2026!   ← change this
 | `/streetsmart` | `app/streetsmart/page.tsx` | Static | Mission, sponsor tiers, mission gallery |
 | `/news` | `app/news/page.tsx` | Server (Supabase) | News archive with placeholder posts |
 | `/news/[slug]` | `app/news/[slug]/page.tsx` | Dynamic | Individual news post |
+| `/contact` | `app/contact/page.tsx` | Static | Dedicated contact page — cards for call/WhatsApp/emails, founders, socials |
+| `/privacy` | `app/privacy/page.tsx` | Static | Privacy Policy |
+| `/terms` | `app/terms/page.tsx` | Static | Terms of Service |
+| `/sitemap.xml` | `app/sitemap.ts` | Generated | XML sitemap for Google Search Console — base URL `https://www.pawpackpantry.com` |
+| `/robots.txt` | `app/robots.ts` | Generated | Allows all, disallows `/admin` and `/api`, points to sitemap |
 | `/admin` | `app/admin/page.tsx` | Client | Password-protected CMS panel — NOT linked anywhere |
 
 ---

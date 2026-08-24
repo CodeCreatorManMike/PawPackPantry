@@ -21,7 +21,11 @@ const gochiHand = Gochi_Hand({
 });
 
 export const metadata: Metadata = {
-  title: "Paw Pack Pantry — Packed with Purpose",
+  metadataBase: new URL("https://www.pawpackpantry.com"),
+  title: {
+    default: "Paw Pack Pantry — Packed with Purpose",
+    template: "%s",
+  },
   description:
     "Gourmet homemade pet meals & treats, hand-cooked in Mauritius. A share of every order feeds and cares for strays — our StreetSmart mission.",
   openGraph: {

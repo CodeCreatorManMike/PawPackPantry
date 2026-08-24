@@ -49,7 +49,7 @@ export default function SiteFooter() {
               { href: "/streetsmart", label: "StreetSmart Campaign" },
               { href: "/gallery", label: "Stray Gallery" },
               { href: "/news", label: "Latest News" },
-              { href: "/#contact", label: "Contact Us" },
+              { href: "/contact", label: "Contact Us" },
             ].map(l => (
               <Link key={l.href} href={l.href} style={{
                 display: "block",
@@ -96,9 +96,17 @@ export default function SiteFooter() {
           <p style={{ fontSize: ".78rem", color: "rgba(246,244,240,.35)" }}>
             Paw Pack Pantry. Packed with Purpose.
           </p>
-          <p style={{ fontSize: ".78rem", color: "rgba(246,244,240,.35)" }}>
-            Made in Mauritius with love.
-          </p>
+          <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
+            <Link href="/privacy" style={{ fontSize: ".78rem", color: "rgba(246,244,240,.35)", textDecoration: "none" }}>
+              Privacy Policy
+            </Link>
+            <Link href="/terms" style={{ fontSize: ".78rem", color: "rgba(246,244,240,.35)", textDecoration: "none" }}>
+              Terms of Service
+            </Link>
+            <p style={{ fontSize: ".78rem", color: "rgba(246,244,240,.35)" }}>
+              Made in Mauritius with love.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
